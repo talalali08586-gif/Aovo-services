@@ -68,7 +68,7 @@ aovo-website/
 │   ├── js/main.js
 │   └── img/hero.jpg
 ├── audio/                Optimised MP3s only
-├── data/demos.json       Audio manifest — single source of truth
+├── data/demos.js         Audio manifest — single source of truth
 ├── README.md
 └── .gitignore
 ```
@@ -89,19 +89,25 @@ Example: `documentaries-en.mp3`. Spaces become `%20` in URLs and break on some h
 clicks Play. Each sample needs Play/Pause, a live progress bar, and a Download button,
 in both English and Arabic.
 
-**The manifest (`data/demos.json`) drives everything.** The contract promises that new
+**The manifest (`data/demos.js`) drives everything.** The contract promises that new
 categories can be added *simply by updating the manifest file and uploading the audio*.
 Nothing about services or audio paths may be hardcoded in HTML or JS.
 
-```json
-[
+It's a plain `.js` file (not `.json`), loaded via `<script src="data/demos.js">` and
+assigned to a `const DEMOS = [...]`. A `.json` manifest would need `fetch()`, which
+Chrome and Edge refuse for local files opened via `file://` (no CORS support without
+a server) — that would break "open `index.html` directly, no server required." Loading
+it as a script tag works in every browser with no server.
+
+```js
+const DEMOS = [
   {
-    "slug": "documentaries",
-    "label": "Documentaries",
-    "en": "audio/documentaries-en.mp3",
-    "ar": "audio/documentaries-ar.mp3"
+    slug: "documentaries",
+    label: "Documentaries",
+    en: "audio/documentaries-en.mp3",
+    ar: "audio/documentaries-ar.mp3"
   }
-]
+];
 ```
 
 Arabic content must render with correct RTL layout.
