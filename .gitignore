@@ -1,0 +1,11 @@
+# Raw client assets — never committed, live in ../_client/ outside this repo
+_client/
+
+# Raw audio — only optimised MP3s in audio/ are committed
+*.wav
+
+# Dependencies (kept for safety; this project has no build step / no npm packages)
+node_modules/
+
+# Windows
+Thumbs.db
