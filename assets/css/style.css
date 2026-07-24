@@ -204,7 +204,14 @@ body{
   background:linear-gradient(180deg,rgba(30,21,11,.6),rgba(12,9,5,.6));
   margin-bottom:.85rem; display:flex; align-items:center; gap:.75rem; flex-wrap:wrap;
 }
-.lang-card .flag{ font-size:1.5rem; line-height:1; }
+.lang-badge{
+  display:inline-flex; align-items:center; justify-content:center;
+  min-width:2.5em; padding:.3em .5em; border-radius:7px;
+  font-family:var(--sans); font-weight:700; font-size:.78rem; letter-spacing:.6px;
+  color:#1a1206; line-height:1;
+}
+.lang-card.en .lang-badge{ background:linear-gradient(180deg,var(--gold-hi),var(--gold)); }
+.lang-card.ar .lang-badge{ background:linear-gradient(180deg,#e7d6ab,var(--gold-deep)); }
 .lang-card .name{ font-weight:600; color:var(--gold-hi); letter-spacing:.5px; flex:1; min-width:90px; }
 .lang-card.ar{ direction:rtl; text-align:right; }
 .btn{
