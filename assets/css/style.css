@@ -213,7 +213,6 @@ body{
 .lang-card.en .lang-badge{ background:linear-gradient(180deg,var(--gold-hi),var(--gold)); }
 .lang-card.ar .lang-badge{ background:linear-gradient(180deg,#e7d6ab,var(--gold-deep)); }
 .lang-card .name{ font-weight:600; color:var(--gold-hi); letter-spacing:.5px; flex:1; min-width:90px; }
-.lang-card.ar{ direction:rtl; text-align:right; }
 .btn{
   display:inline-flex; align-items:center; gap:.5rem; cursor:pointer;
   border-radius:10px; padding:.6rem .95rem; font-family:var(--sans); font-weight:600;

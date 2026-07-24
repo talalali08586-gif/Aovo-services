@@ -125,7 +125,7 @@ function playLang(lang){
   npSeek.disabled = false;
   player.play().then(()=>{
     setPauseIcon(btn);
-    npText.textContent = (lang==='en'?'Playing · English':'تشغيل · العربية');
+    npText.textContent = (lang==='en'?'Playing · English':'Playing · Arabic');
   }).catch(()=>{
     npText.textContent = 'Unable to play this file.';
     npSeek.disabled = true;
