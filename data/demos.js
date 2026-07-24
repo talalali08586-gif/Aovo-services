@@ -30,7 +30,6 @@ const DEMOS = [
   { slug: 'stories-narration', label: 'Stories & Narration',            en: 'audio/stories-narration-en.mp3', ar: 'audio/stories-narration-ar.mp3' },
   { slug: 'faith-based',       label: 'Faith-Based Content',            en: 'audio/faith-based-en.mp3',       ar: 'audio/faith-based-ar.mp3' },
   { slug: 'video-games',       label: 'Video Games',                    en: 'audio/video-games-en.mp3',       ar: 'audio/video-games-ar.mp3' },
-  { slug: 'social-reels',      label: 'Social Reels',                   en: 'audio/social-reels-en.mp3',      ar: 'audio/social-reels-ar.mp3' },
-  { slug: 'youtube',           label: 'YouTube Channels',               en: 'audio/youtube-en.mp3',           ar: 'audio/youtube-ar.mp3' },
+  { slug: 'youtube-social',    label: 'YouTube & Social Media',         en: 'audio/youtube-social-en.mp3',    ar: 'audio/youtube-social-ar.mp3' },
   { slug: 'old-man',           label: 'Old Man Voice',                  en: 'audio/old-man-en.mp3' },
 ];
