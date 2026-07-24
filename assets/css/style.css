@@ -230,8 +230,25 @@ body{
   margin-top:.4rem; font-size:.8rem; color:var(--txt-dim);
   display:flex; align-items:center; gap:.5rem; min-height:1.1rem;
 }
-.bar{ flex:1; height:4px; border-radius:4px; background:rgba(216,178,90,.18); overflow:hidden; }
-.bar > i{ display:block; height:100%; width:0%; background:linear-gradient(90deg,var(--gold),var(--gold-hi)); transition:width .15s linear; }
+/* seekable progress bar — native range input styled to match the gold theme */
+.seek{
+  flex:1; -webkit-appearance:none; appearance:none;
+  height:4px; border-radius:4px; background:rgba(216,178,90,.18);
+  outline:none; cursor:pointer;
+}
+.seek:disabled{ cursor:default; opacity:.6; }
+.seek::-webkit-slider-runnable-track{ height:4px; border-radius:4px; background:transparent; }
+.seek::-moz-range-track{ height:4px; border-radius:4px; background:rgba(216,178,90,.18); }
+.seek::-moz-range-progress{ height:4px; border-radius:4px; background:linear-gradient(90deg,var(--gold),var(--gold-hi)); }
+.seek::-webkit-slider-thumb{
+  -webkit-appearance:none; appearance:none;
+  width:13px; height:13px; margin-top:-4.5px; border-radius:50%;
+  background:var(--gold-hi); box-shadow:0 0 0 3px rgba(0,0,0,.4), 0 0 8px var(--gold-glow);
+}
+.seek::-moz-range-thumb{
+  width:13px; height:13px; border:none; border-radius:50%;
+  background:var(--gold-hi); box-shadow:0 0 0 3px rgba(0,0,0,.4), 0 0 8px var(--gold-glow);
+}
 
 /* ---------- ANIMATIONS ---------- */
 @keyframes popIn{ from{opacity:0; transform:translateY(10px) scale(.97)} to{opacity:1; transform:none} }

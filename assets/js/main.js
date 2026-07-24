@@ -52,10 +52,16 @@ const dlEn      = document.getElementById('dl-en');
 const dlAr      = document.getElementById('dl-ar');
 const player    = document.getElementById('player');
 const npText    = document.getElementById('np-text');
-const npBar     = document.getElementById('np-bar');
+const npSeek    = document.getElementById('np-seek');
 
 let current = null;     // current service key
 let lastTrigger = null; // button to restore focus to
+let seeking = false;    // true while the user is dragging the seek handle
+
+function setSeekFill(pct){
+  npSeek.value = pct;
+  npSeek.style.background = `linear-gradient(90deg,var(--gold) ${pct}%,rgba(216,178,90,.18) ${pct}%)`;
+}
 
 function resetPlayBtns(){
   [playEn, playAr].forEach(b=>{
@@ -102,7 +108,8 @@ function filename(label, lang, src){
 }
 function stopAudio(){
   player.pause(); player.removeAttribute('src'); player.load();
-  resetPlayBtns(); npText.textContent='Not playing'; npBar.style.width='0%';
+  resetPlayBtns(); npText.textContent='Not playing';
+  npSeek.disabled = true; setSeekFill(0);
 }
 function playLang(lang){
   const d = DEMO_MAP[current]; if(!d) return;
@@ -115,11 +122,13 @@ function playLang(lang){
 
   resetPlayBtns();
   player.src = src;
+  npSeek.disabled = false;
   player.play().then(()=>{
     setPauseIcon(btn);
     npText.textContent = (lang==='en'?'Playing · English':'تشغيل · العربية');
   }).catch(()=>{
     npText.textContent = 'Unable to play this file.';
+    npSeek.disabled = true;
   });
 }
 
@@ -132,7 +141,16 @@ document.addEventListener('keydown', e=>{ if(e.key==='Escape' && overlay.classLi
 
 player.addEventListener('play',  ()=>{ /* state handled in playLang */ });
 player.addEventListener('pause', ()=>{ if(player.ended) return; resetPlayBtns(); if(!player.ended) npText.textContent='Paused'; });
-player.addEventListener('ended', ()=>{ resetPlayBtns(); npText.textContent='Finished'; npBar.style.width='100%'; });
+player.addEventListener('ended', ()=>{ resetPlayBtns(); npText.textContent='Finished'; setSeekFill(100); });
 player.addEventListener('timeupdate', ()=>{
-  if(player.duration) npBar.style.width = (player.currentTime/player.duration*100)+'%';
+  if(!seeking && player.duration) setSeekFill(player.currentTime/player.duration*100);
 });
+
+// drag-to-seek: jump immediately while dragging, and suppress timeupdate
+// fighting the handle position until the user releases it
+npSeek.addEventListener('input', ()=>{
+  seeking = true;
+  if(player.duration) player.currentTime = (npSeek.value/100)*player.duration;
+  setSeekFill(npSeek.value);
+});
+npSeek.addEventListener('change', ()=>{ seeking = false; });
