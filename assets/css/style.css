@@ -1,11 +1,13 @@
 /* ============================================================
    AOVO SERVICES — interactive voiceover hero — stylesheet
    EDIT AUDIO FILES: see data/demos.json (see README.md).
-   EDIT HERO PHOTO: replace assets/img/mainpic.jpeg, keep the filename,
-   or change the --hero path below.
+   EDIT HERO PHOTO: replace assets/img/hero.jpg, keep the filename,
+   or change the .stage-photo src in index.html.
+   If you swap in a new photo, give it a NEW filename (hero-2.jpg) and update
+   the src — browsers and CDNs cache images hard, and reusing a filename is
+   the usual reason a "replaced" photo still shows the old one.
    ============================================================ */
 :root{
-  --hero: url('../img/mainpic.jpeg');
   --ink:        #0c0a07;
   --ink-2:      #14100a;
   --gold-hi:    #fbe7b3;
@@ -40,12 +42,33 @@ body{
   position:relative;
   width:100%;
   aspect-ratio:16/9;
-  background:var(--hero) center 18% / cover no-repeat;
+  background:var(--ink);
   overflow:hidden;
+}
+/* real <img> instead of a CSS background-image: mobile Safari/Chrome can
+   rasterize a large background-image at reduced resolution when its element
+   sits in a GPU-composited layer (.stage does, next to the backdrop-filter
+   elements above it) — that's what was reading as blur on phones. An <img>
+   goes through the browser's normal image decode/paint path instead. */
+.stage-photo{
+  position:absolute; inset:0; z-index:0;
+  width:100%; height:100%;
+  object-fit:cover; object-position:center 18%;
+  /* Desktop framing. This photo is 2688x1520 — almost exactly the stage's
+     own 16:9 — so object-fit:cover fits it practically edge to edge and
+     magnifies it not at all, leaving the subject small and the connector
+     lines pointing at empty room. The previous photo was 1920x1288, tall
+     enough that cover had to scale it up ~26% to fill the width, and that
+     incidental zoom is what the approved design was signed off against.
+     Zoom back in deliberately to restore it. At 1.18x a 1521px-wide stage
+     samples ~1795px of the 2688px source, so nothing is ever upscaled.
+     Mobile resets this — see the 860px breakpoint. */
+  transform:scale(1.18); transform-origin:50% 42%;
+  display:block;
 }
 /* atmosphere: darken edges + warm vignette so gold pops over photo */
 .stage::before{
-  content:""; position:absolute; inset:0;
+  content:""; position:absolute; inset:0; z-index:1;
   background:
     linear-gradient(90deg, rgba(8,6,3,.85) 0%, rgba(8,6,3,.10) 26%, rgba(8,6,3,0) 50%, rgba(8,6,3,.10) 74%, rgba(8,6,3,.85) 100%),
     linear-gradient(180deg, rgba(8,6,3,.78) 0%, rgba(8,6,3,0) 28%, rgba(8,6,3,0) 58%, rgba(8,6,3,.88) 100%);
@@ -53,7 +76,7 @@ body{
 }
 /* fine grain for texture */
 .stage::after{
-  content:""; position:absolute; inset:0; pointer-events:none; opacity:.05; mix-blend-mode:overlay;
+  content:""; position:absolute; inset:0; z-index:2; pointer-events:none; opacity:.05; mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
@@ -258,12 +281,55 @@ body{
 
 /* ---------- RESPONSIVE / MOBILE ---------- */
 @media (max-width:860px){
-  /* cap width so the portrait crop of the (landscape) hero photo never
-     gets stretched past its native resolution — that stretching is what
-     reads as blur on wider phones/tablets within this breakpoint */
-  .hero{ display:flex; flex-direction:column; background:linear-gradient(180deg,#171008,#0c0a07); max-width:420px; margin:0 auto; }
-  .stage{ aspect-ratio:3/3.4; order:2; }
-  .stage{ background-position:center 22%; }
+  /* full viewport width — a fixed max-width here previously caged the hero
+     into a narrow centered column (with the photo trapped inside it) on
+     anything wider than ~420px, which is what read as the image being
+     off-center/"shifted" on larger phones and tablets in this breakpoint */
+  .hero{ display:flex; flex-direction:column; background:linear-gradient(180deg,#171008,#0c0a07); width:100%; overflow:hidden; }
+  /* moderate crop (see the tighter override below for narrow phones):
+     the source photo is 2688x1520. object-fit:cover on a tall box only
+     shows a horizontal slice of it, and that slice must still contain
+     enough source pixels to cover the box at 2-3x device pixel ratio or
+     the browser has to upscale it — which is what read as "blurry" at
+     tablet-ish widths (e.g. 768-860px) within this same breakpoint. */
+  .stage{ aspect-ratio:4/3.4; order:2; }
+  /* drop the desktop zoom: the tall mobile crop already magnifies the photo
+     a long way, and stacking the two would upscale past the source's native
+     resolution */
+  .stage-photo{ object-position:center 20%; transform:none; }
+
+  /* ---- THE MOBILE BLUR FIX ----------------------------------------------
+     This is what actually caused the photo to look soft on Android phones
+     while looking perfectly sharp on desktop Chrome. It was never the image
+     file or its resolution — the source is 2688x1520, which is more pixels
+     than any phone in this breakpoint asks for.
+
+     The cause is GPU compositing. Two things forced the hero photo to be
+     drawn into an offscreen GPU texture:
+
+       1. .stage::after painted a noise texture over the whole photo with
+          mix-blend-mode:overlay. Blending forces the browser to render the
+          photo and the overlay into a shared offscreen buffer.
+       2. .pill, .features and all 12 .label chips sit on top of the photo
+          with backdrop-filter:blur(). Each one makes the browser snapshot
+          the photo behind it so it can be blurred.
+
+     Desktop Chrome allocates those buffers at full device resolution, so it
+     looks correct — which is why testing on desktop never reproduced it.
+     Android Chrome is far more conservative with GPU memory and commonly
+     rasterizes these buffers at around 1x instead of the phone's real 2.6x-3.5x
+     pixel ratio, then stretches the result back up to fill the screen. That
+     upscaling of an under-sampled texture is the blur, and it hits the photo
+     even though the photo itself is plenty sharp.
+
+     Turning both effects off inside this breakpoint lets the photo take the
+     browser's normal image path, where it is decoded and painted at the
+     screen's true pixel density. Desktop is untouched, so the approved
+     design is unchanged there. On mobile the only visible difference is a
+     very subtle loss of grain and of the frosted blur behind the chips —
+     the chips keep their own translucent background, so they stay readable. */
+  .stage::after{ display:none; }
+  .pill, .label, .features{ backdrop-filter:none; }
   .brand{ position:static; transform:none; order:1; width:100%; padding:26px 18px 12px; }
   .brand{ animation:none; }
   .col{ position:static; width:100%; padding:0 16px; display:grid; grid-template-columns:1fr 1fr; gap:.6rem; }
@@ -275,6 +341,12 @@ body{
   .features{ position:static; transform:none; order:5; width:auto; margin:16px; grid-template-columns:1fr 1fr; gap:.7rem; animation:none; }
   .feature{ justify-content:flex-start; }
   .feature:nth-child(odd){ border-left:none; }
+}
+@media (max-width:600px){
+  /* narrower phones have far fewer physical pixels to fill, so the taller,
+     more dramatic portrait crop stays sharp here even at 3x DPR */
+  .stage{ aspect-ratio:3/3.4; }
+  .stage-photo{ object-position:center 22%; }
 }
 @media (max-width:420px){
   .col{ grid-template-columns:1fr; }

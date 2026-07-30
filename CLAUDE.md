@@ -66,7 +66,7 @@ aovo-website/
 ├── assets/
 │   ├── css/style.css
 │   ├── js/main.js
-│   └── img/mainpic.jpeg
+│   └── img/hero.jpg
 ├── audio/                Optimised MP3s only
 ├── data/demos.js         Audio manifest — single source of truth
 ├── README.md

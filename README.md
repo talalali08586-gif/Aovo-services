@@ -18,7 +18,7 @@ aovo-website/
 ├── assets/
 │   ├── css/style.css      All page styles
 │   ├── js/main.js         Page logic — renders labels, drives the popup
-│   └── img/mainpic.jpeg   Hero photo
+│   └── img/hero.jpg      Hero photo
 ├── audio/                 Optimised MP3s only (never WAVs)
 ├── data/demos.js          Audio manifest — single source of truth
 └── .gitignore
