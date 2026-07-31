@@ -1,11 +1,11 @@
 /* ============================================================
    AOVO SERVICES — interactive voiceover hero — stylesheet
    EDIT AUDIO FILES: see data/demos.json (see README.md).
-   EDIT HERO PHOTO: replace assets/img/hero.jpg, keep the filename,
-   or change the .stage-photo src in index.html.
-   If you swap in a new photo, give it a NEW filename (hero-2.jpg) and update
-   the src — browsers and CDNs cache images hard, and reusing a filename is
-   the usual reason a "replaced" photo still shows the old one.
+   EDIT HERO PHOTO: the current photo is assets/img/hero-2.jpg.
+   When swapping in a new photo, ALWAYS give it a NEW filename (hero-3.jpg,
+   hero-4.jpg, ...) and update the .stage-photo src in index.html — browsers
+   and CDNs cache images hard, and reusing a filename is the usual reason a
+   "replaced" photo still shows the old (often blurrier) one on phones.
    ============================================================ */
 :root{
   --ink:        #0c0a07;

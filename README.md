@@ -18,7 +18,7 @@ aovo-website/
 ├── assets/
 │   ├── css/style.css      All page styles
 │   ├── js/main.js         Page logic — renders labels, drives the popup
-│   └── img/hero.jpg      Hero photo
+│   └── img/hero-2.jpg    Hero photo (versioned filename — see note below)
 ├── audio/                 Optimised MP3s only (never WAVs)
 ├── data/demos.js          Audio manifest — single source of truth
 └── .gitignore
@@ -96,8 +96,43 @@ Tested on Chrome, Firefox, Safari, Edge, and mobile (iOS/Android). Uses
 and degrades gracefully (labels still work, just without entrance
 animation) on older browsers that don't support `clamp()`/`backdrop-filter`.
 
+## How to replace the hero photo
+
+Browsers, phones, and CDNs cache images very aggressively. If you replace
+the photo but keep the same filename, visitors — especially on mobile,
+where there is no "hard refresh" — will keep seeing the **old** photo,
+sometimes for weeks. This is the classic cause of "we uploaded a sharp
+new image but phones still show a blurry one."
+
+So, to swap the photo:
+
+1. Save the new image with a **new, numbered filename** — the current one
+   is `hero-2.jpg`, so the next would be `hero-3.jpg`, then `hero-4.jpg`,
+   and so on. Never reuse an old filename.
+2. Put it in `assets/img/`.
+3. Update the `src` (and `width`/`height` to the new image's real pixel
+   dimensions) of the `.stage-photo` `<img>` tag in `index.html`.
+4. Upload both files to the host. The old image file can be deleted.
+
+Similarly, `style.css` is linked as `style.css?v=2` in `index.html`.
+After changing the CSS, bump that number (`?v=3`, `?v=4`, …) so cached
+copies on visitors' phones are refreshed.
+
 ## Deployment
 
 Hosted on Hostinger; audio is served through Cloudflare CDN. Since there's
 no build step, deployment is just uploading the repo contents (minus
 `.git`) to the host.
+
+**After deploying, purge the caches** so visitors get the new files
+immediately:
+
+- Cloudflare dashboard → Caching → *Purge Everything* (or purge the
+  specific changed URLs).
+- Hostinger hPanel → Websites → your site → *Clear cache* (if the plan's
+  CDN/cache feature is enabled).
+
+Also note: Cloudflare's **Mirage** and **Polish** features (Speed →
+Optimization) recompress or downgrade images for mobile visitors. If the
+hero photo ever looks softer on phones than the file you uploaded, check
+that these are switched **off** for this site.
