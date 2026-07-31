@@ -16,7 +16,17 @@
 
 <section class="hero">
   <div class="stage">
-    <img class="stage-photo" src="assets/img/hero-2.jpg" alt="AOVO voiceover artist in a professional studio" width="2688" height="1520" loading="eager" fetchpriority="high" />
+    <!-- Phones/tablets get hero-2-mobile.jpg: a pre-cropped 1600x1360 portrait
+         version of the same photo. Hostinger's CDN image optimizer shrinks any
+         image wider than ~1600px (it served the 2688px original at 1600x905,
+         which phones then had to stretch back up — that read as "blurry on
+         mobile"). The mobile file is already at/below that cap, so the CDN
+         passes it through and phones render it pixel-sharp. Desktop keeps the
+         full-resolution original. -->
+    <picture>
+      <source media="(max-width:860px)" srcset="assets/img/hero-2-mobile.jpg" width="1600" height="1360" />
+      <img class="stage-photo" src="assets/img/hero-2.jpg" alt="AOVO voiceover artist in a professional studio" width="2688" height="1520" loading="eager" fetchpriority="high" />
+    </picture>
   </div>
 
   <img class="logo" src="assets/img/logo.png" alt="AOVO Services logo" />

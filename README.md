@@ -18,7 +18,8 @@ aovo-website/
 ├── assets/
 │   ├── css/style.css      All page styles
 │   ├── js/main.js         Page logic — renders labels, drives the popup
-│   └── img/hero-2.jpg    Hero photo (versioned filename — see note below)
+│   ├── img/hero-2.jpg    Hero photo, desktop (versioned — see note below)
+│   └── img/hero-2-mobile.jpg  Portrait crop served to phones/tablets
 ├── audio/                 Optimised MP3s only (never WAVs)
 ├── data/demos.js          Audio manifest — single source of truth
 └── .gitignore
@@ -110,9 +111,22 @@ So, to swap the photo:
    is `hero-2.jpg`, so the next would be `hero-3.jpg`, then `hero-4.jpg`,
    and so on. Never reuse an old filename.
 2. Put it in `assets/img/`.
-3. Update the `src` (and `width`/`height` to the new image's real pixel
-   dimensions) of the `.stage-photo` `<img>` tag in `index.html`.
-4. Upload both files to the host. The old image file can be deleted.
+3. **Also generate the mobile version.** Phones and tablets are served a
+   pre-cropped portrait copy (`hero-2-mobile.jpg`), kept at 1600px wide
+   or less because Hostinger's CDN image optimizer shrinks anything
+   larger (that shrinking is what once made the hero look blurry on
+   phones). For a 16:9-ish source photo, this ffmpeg command crops the
+   centre and resizes it (adjust the crop x-offset `450` if the subject
+   isn't centred):
+
+   ```bash
+   ffmpeg -i assets/img/hero-3.jpg -vf "crop=1788:1520:450:0,scale=1600:1360:flags=lanczos" -q:v 2 assets/img/hero-3-mobile.jpg
+   ```
+
+4. Update the `<picture>` block in `index.html`: the `<source>` `srcset`
+   points at the new mobile file, the `<img>` `src` at the new desktop
+   file (and update `width`/`height` to the images' real pixel sizes).
+5. Upload all changed files to the host. Old image files can be deleted.
 
 Similarly, `style.css` is linked as `style.css?v=2` in `index.html`.
 After changing the CSS, bump that number (`?v=3`, `?v=4`, …) so cached
@@ -132,7 +146,11 @@ immediately:
 - Hostinger hPanel → Websites → your site → *Clear cache* (if the plan's
   CDN/cache feature is enabled).
 
-Also note: Cloudflare's **Mirage** and **Polish** features (Speed →
-Optimization) recompress or downgrade images for mobile visitors. If the
-hero photo ever looks softer on phones than the file you uploaded, check
-that these are switched **off** for this site.
+Also note: **CDN image optimizers re-shrink images.** Hostinger's CDN
+was confirmed (July 2026) to downscale the 2688px hero photo to 1600px
+and recompress it, which made it blurry on phones. Turn off image
+optimization in hPanel (Websites → your site → Performance → CDN) if the
+plan allows it; either way, images meant for high-DPI phone screens are
+kept at 1600px wide or less so the optimizer has nothing to shrink.
+Cloudflare's **Mirage**/**Polish** features do the same — keep them off
+for this site too.

@@ -286,12 +286,13 @@ body{
      anything wider than ~420px, which is what read as the image being
      off-center/"shifted" on larger phones and tablets in this breakpoint */
   .hero{ display:flex; flex-direction:column; background:linear-gradient(180deg,#171008,#0c0a07); width:100%; overflow:hidden; }
-  /* moderate crop (see the tighter override below for narrow phones):
-     the source photo is 2688x1520. object-fit:cover on a tall box only
-     shows a horizontal slice of it, and that slice must still contain
-     enough source pixels to cover the box at 2-3x device pixel ratio or
-     the browser has to upscale it — which is what read as "blurry" at
-     tablet-ish widths (e.g. 768-860px) within this same breakpoint. */
+  /* moderate crop (see the tighter override below for narrow phones).
+     Inside this breakpoint the <picture> in index.html serves
+     hero-2-mobile.jpg — a 1600x1360 portrait crop of the same photo,
+     matching this box's 4/3.4 shape. It is sized at/below the ~1600px cap
+     of Hostinger's CDN image optimizer, so the CDN passes it through
+     untouched instead of shrinking it (shrink-then-stretch is what made
+     the photo look blurry on phones). */
   .stage{ aspect-ratio:4/3.4; order:2; }
   /* drop the desktop zoom: the tall mobile crop already magnifies the photo
      a long way, and stacking the two would upscale past the source's native
@@ -344,7 +345,8 @@ body{
 }
 @media (max-width:600px){
   /* narrower phones have far fewer physical pixels to fill, so the taller,
-     more dramatic portrait crop stays sharp here even at 3x DPR */
+     more dramatic portrait crop stays sharp here even at 3x DPR (the
+     1600x1360 mobile image comfortably covers this box on any phone) */
   .stage{ aspect-ratio:3/3.4; }
   .stage-photo{ object-position:center 22%; }
 }
