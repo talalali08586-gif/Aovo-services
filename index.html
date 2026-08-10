@@ -7,10 +7,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-<!-- ?v=2 is a cache-buster: bump the number whenever this file changes in a
-     way visitors must see immediately, so phones and CDNs can't keep serving
-     a stale cached copy of the stylesheet. -->
-<link rel="stylesheet" href="assets/css/style.css?v=2">
+<!-- ?v=3 is a cache-buster: bump the number whenever the stylesheet changes
+     in a way visitors must see immediately, so phones and CDNs can't keep
+     serving a stale cached copy. Keep the number in sync on every page. -->
+<link rel="stylesheet" href="assets/css/style.css?v=3">
 </head>
 <body>
 
@@ -30,6 +30,13 @@
   </div>
 
   <img class="logo" src="assets/img/logo.png" alt="AOVO Services logo" />
+
+  <!-- Site navigation — keep the links identical on every page and move the
+       "active" class to whichever page the file belongs to. -->
+  <nav class="site-nav" aria-label="Site">
+    <a href="index.html" class="active">Home</a>
+    <a href="about.html">About Us</a>
+  </nav>
 
   <header class="brand">
     <h1>AOVO Services</h1>

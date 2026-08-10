@@ -33,10 +33,14 @@ function makeLabelButton(demo){
 
 // first half of the manifest renders in the left column, the rest in the
 // right column — matches the original 6-left/6-right layout and rebalances
-// automatically as categories are added or removed.
-const splitAt = Math.ceil(DEMOS.length / 2);
-DEMOS.slice(0, splitAt).forEach(d => colLeft.appendChild(makeLabelButton(d)));
-DEMOS.slice(splitAt).forEach(d => colRight.appendChild(makeLabelButton(d)));
+// automatically as categories are added or removed. Pages without label
+// columns (e.g. about.html) simply skip this step — they can still open
+// the popup via data-demo-popup buttons (see the events section below).
+if (colLeft && colRight) {
+  const splitAt = Math.ceil(DEMOS.length / 2);
+  DEMOS.slice(0, splitAt).forEach(d => colLeft.appendChild(makeLabelButton(d)));
+  DEMOS.slice(splitAt).forEach(d => colRight.appendChild(makeLabelButton(d)));
+}
 
 const DEMO_MAP = Object.fromEntries(DEMOS.map(d => [d.slug, d]));
 
@@ -133,6 +137,13 @@ function playLang(lang){
 }
 
 /* events */
+// Any element with a data-demo-popup="slug" attribute opens the same demo
+// popup for that service — e.g. the About page's "Explore Our Talent Roster"
+// button (data-demo-popup="intl-voices"). The slug must match an entry in
+// data/demos.js.
+document.querySelectorAll('[data-demo-popup]').forEach(el=>{
+  el.addEventListener('click', ()=> openModal(el.dataset.demoPopup, el));
+});
 playEn.addEventListener('click', ()=> playLang('en'));
 playAr.addEventListener('click', ()=> playLang('ar'));
 closeBtn.addEventListener('click', closeModal);

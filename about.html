@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>About Us — AOVO Services</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<!-- ?v=3 is a cache-buster — keep the number in sync with index.html. -->
+<link rel="stylesheet" href="assets/css/style.css?v=3">
+</head>
+<body>
+
+<!-- ============================================================
+     PAGE HEADER — logo (top-left) + shared site nav (top-right).
+     Keep the nav links identical on every page; the "active" class
+     marks the page the file belongs to.
+     ============================================================ -->
+<div class="page-head">
+  <img class="logo" src="assets/img/logo.png" alt="AOVO Services logo" />
+  <nav class="site-nav" aria-label="Site">
+    <a href="index.html">Home</a>
+    <a href="about.html" class="active">About Us</a>
+  </nav>
+</div>
+
+<main class="about-main">
+
+  <!-- ============================================================
+       1) INTRO — who AOVO Services is
+       ============================================================ -->
+  <section class="about-intro">
+    <img class="intro-logo" src="assets/img/logo.png" alt="" />
+    <h1>We&rsquo;re AOVO Services, LLC</h1>
+    <p>AOVO Services is an international voiceover and audio-production partner
+       connecting talented voices with global audiences.</p>
+    <p>With operations in the U.S. and Egypt, we provide voice acting,
+       English&ndash;Arabic localization, audio editing, and full project
+       support&mdash;delivering polished, ready-to-use audio for brands,
+       agencies, and creators.</p>
+  </section>
+
+  <!-- ============================================================
+       2) AHMED — founder bio (photo left, text right on desktop)
+       ============================================================ -->
+  <section class="bio">
+    <div class="bio-photo">
+      <img src="assets/img/about-ahmed.jpg" alt="Ahmed Osama, co-founder of AOVO Services" width="1000" height="1340" loading="lazy" />
+    </div>
+    <div class="bio-text">
+      <div class="about-eyebrow">Ahmed Osama</div>
+      <h2 class="about-h2">The &ldquo;AO&rdquo; in AOVO</h2>
+      <p>Labcoat by day, studio headphones by night &hellip; Ahmed is a
+         bilingual English and Arabic voice actor, audio engineer, and
+         biotechnologist with years of experience in professional recording.</p>
+      <p>His deep, warm, versatile voice has been featured in projects reaching
+         audiences across 20+ countries&mdash;from documentaries and training
+         content to commercials, promos, video games, and digital campaigns.
+         Ahmed&rsquo;s voice is featured in projects with thousands to millions
+         of views, including one with over 106 million views and growing.</p>
+      <span class="focus"><strong>Focus:</strong> Voice acting, audio production, and MENA localization.</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       3) TRENA — founder bio (photo right, text left on desktop)
+       ============================================================ -->
+  <section class="bio flip">
+    <div class="bio-photo">
+      <img src="assets/img/about-trena.jpg" alt="Trena, head of U.S. operations at AOVO Services" width="1000" height="1340" loading="lazy" />
+    </div>
+    <div class="bio-text">
+      <div class="about-eyebrow">Trena</div>
+      <h2 class="about-h2">Worldwide Administration</h2>
+      <p>The sweet storyteller with a sharp business brain &hellip; Trena leads
+         AOVO Services&rsquo;s U.S. operations from Florida, managing client
+         communication, project coordination, billing, and English-language
+         quality control.</p>
+      <p>She makes sure every project is organized, clearly communicated, and
+         delivered to a high standard. Bilingual in English and Italian,
+         Trena&rsquo;s favorite genre is storytelling.</p>
+      <span class="focus"><strong>Focus:</strong> U.S. operations, client relations, project management, and quality control.</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       4) GLOBAL VOICES, ONE TEAM — talent network + demo popup.
+       The button opens the SAME audio popup as the home page labels;
+       data-demo-popup names the manifest slug to play (data/demos.js).
+       ============================================================ -->
+  <section class="team">
+    <h2 class="about-h2">Global Voices, One Team</h2>
+    <img src="assets/img/about-team.jpg" alt="A diverse group of voice actors gathered in a recording studio" width="1600" height="872" loading="lazy" />
+    <p>Beyond our founders, AOVO Services also works with a vetted network of
+       U.S. and international voice talent. Need a specific accent, language,
+       or dialect? We help find the right authentic voice for your project.</p>
+    <button class="btn-cta" data-demo-popup="intl-voices">
+      <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      Explore Some of Our Talent Roster
+    </button>
+  </section>
+
+  <!-- ============================================================
+       5) WHY AOVO SERVICES — three selling points
+       ============================================================ -->
+  <section class="why">
+    <h2 class="about-h2">Why AOVO Services?</h2>
+    <div class="why-grid">
+      <div class="why-card">
+        <h3>U.S.-Based Support</h3>
+        <p>A hallmark of trusted reliability &mdash; count on friendly,
+           straightforward communication, contracts, billing, and project
+           coordination.</p>
+      </div>
+      <div class="why-card">
+        <h3>24-Hour Coverage</h3>
+        <p>With Florida and Egypt as operational bases, projects keep moving
+           across time zones.</p>
+      </div>
+      <div class="why-card">
+        <h3>Full Audio Production</h3>
+        <p>From localization and casting to recording, editing, and mastering,
+           we deliver high-quality, broadcast-ready files.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       6) READY TO BE HEARD — closing call to action.
+       The quote button is intentionally disabled until the Contact
+       page exists (Phase 4) — then replace the <button> with
+       <a class="btn-cta" href="contact.html">.
+       ============================================================ -->
+  <section class="closing">
+    <h2 class="about-h2">Ready to Be Heard?</h2>
+    <p>Tell us about your project, and let AOVO Services, LLC bring it to life.</p>
+    <button class="btn-cta" disabled title="Coming soon">Request a Quote</button>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     DEMO POPUP — identical markup to index.html so the shared
+     main.js drives it unchanged. Opened by the talent-roster
+     button above.
+     ============================================================ -->
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="m-title">
+  <div class="modal">
+    <button class="x" id="closeBtn" aria-label="Close">&times;</button>
+    <div class="eyebrow">Sample Demo</div>
+    <h2 id="m-title">Service</h2>
+    <p class="sub">Listen to a sample demo or download the file — available in English and Arabic.</p>
+
+    <div class="lang-card en">
+      <span class="lang-badge">EN</span>
+      <span class="name">English</span>
+      <button class="btn btn-play" id="play-en"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> Play</button>
+      <a class="btn btn-dl" id="dl-en" download><svg viewBox="0 0 24 24"><path d="M12 3v10m0 0l4-4m-4 4l-4-4M5 19h14"/></svg> Download</a>
+    </div>
+
+    <div class="lang-card ar">
+      <span class="lang-badge">AR</span>
+      <span class="name">Arabic</span>
+      <button class="btn btn-play" id="play-ar"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> Play</button>
+      <a class="btn btn-dl" id="dl-ar" download><svg viewBox="0 0 24 24"><path d="M12 3v10m0 0l4-4m-4 4l-4-4M5 19h14"/></svg> Download</a>
+    </div>
+
+    <div class="nowplaying" id="nowplaying">
+      <span id="np-text">Not playing</span>
+      <input type="range" class="seek" id="np-seek" min="0" max="100" value="0" step="0.1" aria-label="Seek" disabled>
+    </div>
+  </div>
+</div>
+
+<audio id="player" preload="none"></audio>
+
+<script src="data/demos.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

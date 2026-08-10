@@ -15,11 +15,13 @@ a browser window). No local server, no build step, no install required.
 ```
 aovo-website/
 ├── index.html            Home page
+├── about.html            About Us page
 ├── assets/
-│   ├── css/style.css      All page styles
+│   ├── css/style.css      All page styles (home, about, shared nav, popup)
 │   ├── js/main.js         Page logic — renders labels, drives the popup
 │   ├── img/hero-2.jpg    Hero photo, desktop (versioned — see note below)
-│   └── img/hero-2-mobile.jpg  Portrait crop served to phones/tablets
+│   ├── img/hero-2-mobile.jpg  Portrait crop served to phones/tablets
+│   └── img/about-*.jpg   About page photos (founders + talent network)
 ├── audio/                 Optimised MP3s only (never WAVs)
 ├── data/demos.js          Audio manifest — single source of truth
 └── .gitignore
@@ -128,9 +130,9 @@ So, to swap the photo:
    file (and update `width`/`height` to the images' real pixel sizes).
 5. Upload all changed files to the host. Old image files can be deleted.
 
-Similarly, `style.css` is linked as `style.css?v=2` in `index.html`.
-After changing the CSS, bump that number (`?v=3`, `?v=4`, …) so cached
-copies on visitors' phones are refreshed.
+Similarly, `style.css` is linked as `style.css?v=3` on every page.
+After changing the CSS, bump that number (`?v=4`, `?v=5`, …) **in every
+HTML file** so cached copies on visitors' phones are refreshed.
 
 ## Deployment
 
