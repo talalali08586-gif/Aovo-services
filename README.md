@@ -16,6 +16,7 @@ a browser window). No local server, no build step, no install required.
 aovo-website/
 ├── index.html            Home page
 ├── about.html            About Us page
+├── feedback.html         Client reviews (testimonial slider)
 ├── assets/
 │   ├── css/style.css      All page styles (home, about, shared nav, popup)
 │   ├── js/main.js         Page logic — renders labels, drives the popup
@@ -130,9 +131,9 @@ So, to swap the photo:
    file (and update `width`/`height` to the images' real pixel sizes).
 5. Upload all changed files to the host. Old image files can be deleted.
 
-Similarly, `style.css` is linked as `style.css?v=3` on every page.
-After changing the CSS, bump that number (`?v=4`, `?v=5`, …) **in every
-HTML file** so cached copies on visitors' phones are refreshed.
+Similarly, `style.css` is linked with a `?v=` cache-buster on every page.
+After changing the CSS, bump that number **in every HTML file** so cached
+copies on visitors' phones are refreshed.
 
 ## Deployment
 
