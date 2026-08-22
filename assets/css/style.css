@@ -117,6 +117,25 @@ body{
   text-shadow:0 1px 8px rgba(0,0,0,.8);
 }
 
+/* Desktop: pin the brand block to the PHOTO, not the window.
+   The stage is a full-bleed 16:9 box, so the photo's rendered height is a
+   fixed fraction of the viewport WIDTH. The base rules above position and
+   size the text with vh offsets and rem caps — units that track the wrong
+   axis — so as the window changed size the text drifted relative to the
+   photo: down over the subject's face on smaller windows, up above the
+   head on large ones. Re-stating every offset and font size in % / vw
+   (the same axis the photo scales on) keeps the text at the same spot on
+   the photo at every window size. Values are chosen to reproduce the
+   approved look at a ~1600px-wide window exactly.
+   Mobile (≤860px) lays the text out ABOVE the photo in normal flow, so
+   these overrides deliberately stop at 861px. */
+@media (min-width:861px){
+  .brand{ top:4.5%; width:92%; pointer-events:none; }
+  .brand h1{ font-size:5.3vw; }
+  .pill{ font-size:max(.7rem,1.18vw); margin-top:1vw; padding:.5vw 1.25vw; }
+  .brand .cta{ font-size:max(.68rem,1.02vw); margin-top:.9vw; }
+}
+
 /* ---------- LABEL COLUMNS ---------- */
 .col{
   position:absolute; top:clamp(120px,21%,30%); bottom:clamp(96px,16%,20%);
