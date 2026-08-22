@@ -209,24 +209,6 @@ body{
 .col-right .label:nth-child(3){animation-delay:.40s}.col-right .label:nth-child(4){animation-delay:.48s}
 .col-right .label:nth-child(5){animation-delay:.56s}.col-right .label:nth-child(6){animation-delay:.64s}
 
-/* ---------- FEATURE BAR ---------- */
-.features{
-  position:absolute; left:50%; transform:translateX(-50%);
-  bottom:clamp(10px,2.4vh,28px); width:min(94%,1100px); z-index:6;
-  display:grid; grid-template-columns:repeat(4,1fr);
-  align-items:center; gap:.4rem;
-  padding:.8rem 1rem; border-radius:16px;
-  border:1px solid var(--gold-line);
-  background:linear-gradient(180deg,rgba(16,11,6,.78),rgba(8,6,3,.86));
-  box-shadow:0 0 0 1px rgba(0,0,0,.4) inset, 0 12px 34px rgba(0,0,0,.55);
-  backdrop-filter:blur(5px);
-  animation:fadeUp 1s ease .3s both;
-}
-.feature{ display:flex; align-items:center; justify-content:center; gap:.6rem; text-align:left; }
-.feature svg{ width:clamp(20px,2.4vw,30px); height:clamp(20px,2.4vw,30px); stroke:var(--gold); fill:none; flex:0 0 auto; }
-.feature span{ color:var(--gold-hi); font-weight:500; letter-spacing:.4px; font-size:clamp(.7rem,1.4vw,1rem); line-height:1.15; }
-.feature + .feature{ border-left:1px solid rgba(216,178,90,.2); }
-
 /* ---------- MODAL ---------- */
 .overlay{
   position:fixed; inset:0; z-index:50; display:none;
@@ -573,7 +555,7 @@ body{
      very subtle loss of grain and of the frosted blur behind the chips —
      the chips keep their own translucent background, so they stay readable. */
   .stage::after{ display:none; }
-  .pill, .label, .features{ backdrop-filter:none; }
+  .pill, .label{ backdrop-filter:none; }
   /* in the stacked mobile layout the nav joins the normal flow above the
      title instead of floating over it (the hero is a flex column here) */
   .hero .site-nav{ position:static; order:0; justify-content:center; padding:14px 16px 0; }
@@ -585,9 +567,6 @@ body{
   .label{ width:auto; animation:none; opacity:1; justify-content:center!important; text-align:center!important; flex-direction:row!important; }
   .col-right .label{ flex-direction:row!important; }
   .label::after, .label::before{ display:none; }
-  .features{ position:static; transform:none; order:5; width:auto; margin:16px; grid-template-columns:1fr 1fr; gap:.7rem; animation:none; }
-  .feature{ justify-content:flex-start; }
-  .feature:nth-child(odd){ border-left:none; }
 }
 @media (max-width:600px){
   /* narrower phones have far fewer physical pixels to fill, so the taller,
@@ -598,6 +577,4 @@ body{
 }
 @media (max-width:420px){
   .col{ grid-template-columns:1fr; }
-  .features{ grid-template-columns:1fr; }
-  .feature + .feature{ border-left:none; border-top:1px solid rgba(216,178,90,.2); padding-top:.6rem; }
 }
