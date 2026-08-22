@@ -439,6 +439,17 @@ body{
 .closing p{ color:var(--txt-dim); max-width:640px; margin:0 auto 1.3rem; line-height:1.65; font-size:clamp(.92rem,1.6vw,1.05rem); }
 .closing .note{ font-size:.78rem; opacity:.75; margin:.8rem auto 0; }
 
+/* Desktop only: fully justify the About page's running text so paragraphs
+   don't trail off into 1–4 word orphan lines. text-wrap:pretty additionally
+   lets newer browsers rebalance breaks to avoid a short last line entirely.
+   The narrow mobile column (≤720px) already wraps evenly, so it keeps the
+   default alignment. */
+@media (min-width:721px){
+  .about-intro p, .bio-text p, .team p, .why-card p, .closing p{
+    text-align:justify; text-wrap:pretty;
+  }
+}
+
 /* about page on phones */
 @media (max-width:720px){
   .bio, .bio.flip{ grid-template-columns:1fr; }
