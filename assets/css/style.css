@@ -560,6 +560,9 @@ body{
 }
 .slider-dots button.active{ background:var(--gold); box-shadow:0 0 8px var(--gold-glow); }
 
+/* centred quote button under the slider (shares .quote-cta-green) */
+.feedback-cta{ text-align:center; margin-top:clamp(28px,4.5vh,52px); }
+
 @media (max-width:720px){
   .slider-arrow.prev{ left:6px; }
   .slider-arrow.next{ right:6px; }
