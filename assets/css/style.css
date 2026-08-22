@@ -405,7 +405,10 @@ body{
 /* team / global voices */
 .team{ text-align:center; margin-bottom:clamp(36px,6vh,72px); }
 .team img{
-  display:block; width:100%; height:auto; border-radius:18px; margin-bottom:1.4rem;
+  /* capped at the same 720px measure as the paragraph below it, so the
+     photo and text read as one column instead of a full-bleed banner */
+  display:block; width:100%; max-width:720px; height:auto;
+  border-radius:18px; margin:0 auto 1.4rem;
   border:1px solid var(--gold-line);
   box-shadow:0 0 0 1px rgba(0,0,0,.4) inset, 0 16px 40px rgba(0,0,0,.5), 0 0 26px var(--gold-glow);
 }
