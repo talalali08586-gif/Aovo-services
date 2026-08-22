@@ -209,6 +209,32 @@ body{
 .col-right .label:nth-child(3){animation-delay:.40s}.col-right .label:nth-child(4){animation-delay:.48s}
 .col-right .label:nth-child(5){animation-delay:.56s}.col-right .label:nth-child(6){animation-delay:.64s}
 
+/* ---------- REQUEST A QUOTE CALL-TO-ACTION ----------
+   Replaces the old feature bar at the bottom of the hero. Deliberately
+   orange — the one element that breaks the gold palette, so it reads as
+   THE action to take. The glow pulses gently (disabled for users with
+   reduced-motion enabled, via the global rule in the animations section). */
+.quote-cta{
+  position:absolute; left:50%; transform:translateX(-50%);
+  bottom:4.5%; z-index:6;
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:clamp(.8rem,1.1vw,1.2rem) clamp(1.8rem,2.8vw,3.2rem);
+  border-radius:999px; text-decoration:none; text-transform:uppercase;
+  font-family:var(--sans); font-weight:700; letter-spacing:1.6px;
+  font-size:clamp(.9rem,1.25vw,1.3rem); color:#fff; white-space:nowrap;
+  background:linear-gradient(180deg,#ff9d45,#f0640a);
+  border:1px solid rgba(255,196,130,.8);
+  box-shadow:0 0 22px rgba(255,122,26,.55), 0 0 44px rgba(255,122,26,.28), 0 10px 28px rgba(0,0,0,.5);
+  text-shadow:0 1px 6px rgba(120,45,0,.6);
+  animation:fadeUp 1s ease .3s both, ctaGlow 2.6s ease-in-out 1.3s infinite;
+  transition:filter .2s ease;
+}
+.quote-cta:hover, .quote-cta:focus-visible{ filter:brightness(1.12); outline:none; }
+@keyframes ctaGlow{
+  0%,100%{ box-shadow:0 0 22px rgba(255,122,26,.55), 0 0 44px rgba(255,122,26,.28), 0 10px 28px rgba(0,0,0,.5); }
+  50%    { box-shadow:0 0 36px rgba(255,122,26,.9),  0 0 72px rgba(255,122,26,.45), 0 10px 28px rgba(0,0,0,.5); }
+}
+
 /* ---------- MODAL ---------- */
 .overlay{
   position:fixed; inset:0; z-index:50; display:none;
@@ -567,6 +593,13 @@ body{
   .label{ width:auto; animation:none; opacity:1; justify-content:center!important; text-align:center!important; flex-direction:row!important; }
   .col-right .label{ flex-direction:row!important; }
   .label::after, .label::before{ display:none; }
+  /* the quote button joins the stacked flow under the label columns;
+     the fadeUp entrance is dropped here because its keyframes assume the
+     desktop translateX(-50%) centring */
+  .quote-cta{
+    position:static; transform:none; order:5; align-self:center;
+    margin:18px auto 24px; animation:ctaGlow 2.6s ease-in-out infinite;
+  }
 }
 @media (max-width:600px){
   /* narrower phones have far fewer physical pixels to fill, so the taller,
