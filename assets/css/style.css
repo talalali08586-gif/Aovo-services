@@ -375,13 +375,15 @@ body{
   font-size:clamp(1.35rem,3vw,2rem); line-height:1.15; margin-bottom:.9rem;
 }
 
-/* founder bios: photo + text side by side, photo side alternates */
+/* founder bios: photo + text side by side, photo side alternates.
+   The photo column is roughly half its original 340px width (client
+   request) and top-aligns with the text block instead of centring. */
 .bio{
-  display:grid; grid-template-columns:minmax(220px,340px) 1fr;
-  gap:clamp(20px,3.5vw,48px); align-items:center;
+  display:grid; grid-template-columns:minmax(140px,180px) 1fr;
+  gap:clamp(20px,3.5vw,48px); align-items:start;
   margin-bottom:clamp(36px,6vh,72px);
 }
-.bio.flip{ grid-template-columns:1fr minmax(220px,340px); }
+.bio.flip{ grid-template-columns:1fr minmax(140px,180px); }
 .bio.flip .bio-photo{ order:2; }
 .bio-photo img{
   display:block; width:100%; height:auto; border-radius:18px;
@@ -454,7 +456,7 @@ body{
 @media (max-width:720px){
   .bio, .bio.flip{ grid-template-columns:1fr; }
   .bio.flip .bio-photo{ order:0; }
-  .bio-photo{ max-width:340px; margin:0 auto; }
+  .bio-photo{ max-width:200px; margin:0 auto; }
   .why-grid{ grid-template-columns:1fr; }
 }
 
