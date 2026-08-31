@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <!-- The ?v= number is a cache-buster — bump it (in every HTML file) whenever
      the stylesheet changes, so phones and CDNs refresh their cached copy. -->
-<link rel="stylesheet" href="assets/css/style.css?v=8">
+<link rel="stylesheet" href="assets/css/style.css?v=9">
 </head>
 <body>
 
@@ -37,24 +37,13 @@
 </header>
 
 <section class="hero">
-  <div class="stage">
-    <!-- Phones/tablets get hero-2-mobile.jpg: a pre-cropped 1600x1360 portrait
-         version of the same photo. Hostinger's CDN image optimizer shrinks any
-         image wider than ~1600px (it served the 2688px original at 1600x905,
-         which phones then had to stretch back up — that read as "blurry on
-         mobile"). The mobile file is already at/below that cap, so the CDN
-         passes it through and phones render it pixel-sharp. Desktop keeps the
-         full-resolution original. -->
-    <picture>
-      <source media="(max-width:860px)" srcset="assets/img/hero-2-mobile.jpg" width="1600" height="1360" />
-      <img class="stage-photo" src="assets/img/hero-2.jpg" alt="AOVO voiceover artist in a professional studio" width="2688" height="1520" loading="eager" fetchpriority="high" />
-    </picture>
-  </div>
 
+  <!-- BRAND BAND — title block in normal flow ABOVE the photo, so it can
+       never overlap the person at any screen width. The photo's top
+       vignette blends into the band's dark background, so the hero still
+       reads as one continuous composition. -->
   <header class="brand">
-    <!-- Logo sits inside the brand block so it stays centred on the same
-         axis as the title on every screen size. -->
-    <img class="logo" src="assets/img/logo-white.png" alt="AOVO Services logo" />
+    <img class="logo" src="assets/img/logo-white.png" alt="" />
     <h1>AOVO Services</h1>
     <div class="pill">
       <svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 1 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-3.08A7 7 0 0 0 19 11h-2z"/></svg>
@@ -63,16 +52,36 @@
     <p class="cta">Click on any label to hear sample demos</p>
   </header>
 
-  <!-- LEFT COLUMN -->
-  <nav class="col col-left" aria-label="Voiceover categories left">
-  </nav>
+  <!-- STAGE WRAP — the photo box plus everything positioned over it (the
+       12 service labels and the quote button). On desktop the labels and
+       button are pinned to the photo; on phones they drop below it into
+       the stacked layout. -->
+  <div class="stage-wrap">
+    <div class="stage">
+      <!-- Phones/tablets get hero-2-mobile.jpg: a pre-cropped 1600x1360 portrait
+           version of the same photo. Hostinger's CDN image optimizer shrinks any
+           image wider than ~1600px (it served the 2688px original at 1600x905,
+           which phones then had to stretch back up — that read as "blurry on
+           mobile"). The mobile file is already at/below that cap, so the CDN
+           passes it through and phones render it pixel-sharp. Desktop keeps the
+           full-resolution original. -->
+      <picture>
+        <source media="(max-width:860px)" srcset="assets/img/hero-2-mobile.jpg" width="1600" height="1360" />
+        <img class="stage-photo" src="assets/img/hero-2.jpg" alt="AOVO voiceover artist in a professional studio" width="2688" height="1520" loading="eager" fetchpriority="high" />
+      </picture>
+    </div>
 
-  <!-- RIGHT COLUMN -->
-  <nav class="col col-right" aria-label="Voiceover categories right">
-  </nav>
+    <!-- LEFT COLUMN -->
+    <nav class="col col-left" aria-label="Voiceover categories left">
+    </nav>
 
-  <!-- CALL TO ACTION — point href at contact.html once the Contact page exists -->
-  <a class="quote-cta" href="#">Request a Quote</a>
+    <!-- RIGHT COLUMN -->
+    <nav class="col col-right" aria-label="Voiceover categories right">
+    </nav>
+
+    <!-- CALL TO ACTION — point href at contact.html once the Contact page exists -->
+    <a class="quote-cta" href="#">Request a Quote</a>
+  </div>
 </section>
 
 <!-- MODAL -->

@@ -35,8 +35,19 @@ body{
   -webkit-font-smoothing:antialiased;
 }
 
-/* ---------- HERO ---------- */
+/* ---------- HERO ----------
+   Layout note: the title block (.brand) sits in normal document flow ABOVE
+   the photo, not on top of it. An earlier version overlaid the title on the
+   photo with hand-tuned absolute coordinates, and at most window sizes the
+   text landed on the subject's face; keeping the text in its own band makes
+   that impossible at any width. Only the side label columns and the quote
+   button overlay the photo (via .stage-wrap), and they hug the edges. */
 .hero{ position:relative; width:100%; }
+
+/* positioning context for the label columns and quote button: its height
+   is exactly the photo box's height, so anything absolutely positioned in
+   here is pinned to the photo itself */
+.stage-wrap{ position:relative; }
 
 .stage{
   position:relative;
@@ -89,10 +100,13 @@ body{
   filter:drop-shadow(0 2px 10px rgba(0,0,0,.6));
 }
 
-/* ---------- BRAND BLOCK ---------- */
+/* ---------- BRAND BLOCK ----------
+   A centred band in normal flow between the header and the photo. The page
+   background shows through it, and the photo's top vignette fades up into
+   the same darkness, so band and photo read as one piece. */
 .brand{
-  position:absolute; top:clamp(14px,3vh,42px); left:50%; transform:translateX(-50%);
-  text-align:center; z-index:6; width:min(92%,820px);
+  text-align:center; width:min(92%,820px); margin:0 auto;
+  padding:clamp(16px,2.6vh,36px) 0 clamp(12px,2vh,26px);
   animation:fadeDown .9s ease both;
 }
 .brand h1{
@@ -119,31 +133,12 @@ body{
   text-shadow:0 1px 8px rgba(0,0,0,.8);
 }
 
-/* Desktop: pin the brand block to the PHOTO, not the window.
-   The stage is a full-bleed 16:9 box, so the photo's rendered height is a
-   fixed fraction of the viewport WIDTH. The base rules above position and
-   size the text with vh offsets and rem caps — units that track the wrong
-   axis — so as the window changed size the text drifted relative to the
-   photo: down over the subject's face on smaller windows, up above the
-   head on large ones. Re-stating every offset and font size in % / vw
-   (the same axis the photo scales on) keeps the text at the same spot on
-   the photo at every window size. Values are chosen to reproduce the
-   approved look at a ~1600px-wide window exactly.
-   Mobile (≤860px) lays the text out ABOVE the photo in normal flow, so
-   these overrides deliberately stop at 861px. */
-@media (min-width:861px){
-  .brand{ top:2%; width:92%; pointer-events:none; }
-  /* the logo joins the width-proportional scheme too; larger than the old
-     corner logo (which capped at 78px) per client request */
-  .brand .logo{ width:5.5vw; margin-bottom:.6vw; }
-  .brand h1{ font-size:5.3vw; }
-  .pill{ font-size:max(.7rem,1.18vw); margin-top:1vw; padding:.5vw 1.25vw; }
-  .brand .cta{ font-size:max(.68rem,1.02vw); margin-top:.9vw; }
-}
-
-/* ---------- LABEL COLUMNS ---------- */
+/* ---------- LABEL COLUMNS ----------
+   Pinned to the photo box (.stage-wrap), hugging its left and right edges;
+   the % offsets are fractions of the photo's height, so the columns keep
+   their place on the photo at every window size. */
 .col{
-  position:absolute; top:clamp(120px,21%,30%); bottom:clamp(96px,16%,20%);
+  position:absolute; top:5%; bottom:12%;
   display:flex; flex-direction:column; justify-content:space-between;
   z-index:5; gap:.4rem;
 }
@@ -593,18 +588,21 @@ body{
 
 /* ---------- ANIMATIONS ---------- */
 @keyframes popIn{ from{opacity:0; transform:translateY(10px) scale(.97)} to{opacity:1; transform:none} }
-@keyframes fadeDown{ from{opacity:0; transform:translate(-50%,-14px)} to{opacity:1; transform:translate(-50%,0)} }
+@keyframes fadeDown{ from{opacity:0; transform:translateY(-14px)} to{opacity:1; transform:none} }
 @keyframes fadeUp{ from{opacity:0; transform:translate(-50%,14px)} to{opacity:1; transform:translate(-50%,0)} }
 @keyframes fadeIn{ from{opacity:0} to{opacity:1} }
 @media (prefers-reduced-motion:reduce){ *{animation:none!important; transition:none!important} }
 
-/* ---------- RESPONSIVE / MOBILE ---------- */
+/* ---------- RESPONSIVE / MOBILE ----------
+   The page order (title band, then photo, then labels, then quote button)
+   is the same as on desktop, so this block only swaps the photo crop, drops
+   the label columns below the photo as a grid, and turns off the effects
+   that blurred the photo on phones (see the note further down). */
 @media (max-width:860px){
-  /* full viewport width — a fixed max-width here previously caged the hero
-     into a narrow centered column (with the photo trapped inside it) on
-     anything wider than ~420px, which is what read as the image being
-     off-center/"shifted" on larger phones and tablets in this breakpoint */
-  .hero{ display:flex; flex-direction:column; background:linear-gradient(180deg,#171008,#0c0a07); width:100%; overflow:hidden; }
+  .hero{ background:linear-gradient(180deg,#171008,#0c0a07); width:100%; overflow:hidden; }
+  /* the labels and quote button leave the photo and join the normal flow,
+     so their container stacks its children instead of pinning them */
+  .stage-wrap{ display:flex; flex-direction:column; }
   /* moderate crop (see the tighter override below for narrow phones).
      Inside this breakpoint the <picture> in index.html serves
      hero-2-mobile.jpg — a 1600x1360 portrait crop of the same photo,
@@ -612,7 +610,7 @@ body{
      of Hostinger's CDN image optimizer, so the CDN passes it through
      untouched instead of shrinking it (shrink-then-stretch is what made
      the photo look blurry on phones). */
-  .stage{ aspect-ratio:4/3.4; order:2; }
+  .stage{ aspect-ratio:4/3.4; }
   /* drop the desktop zoom: the tall mobile crop already magnifies the photo
      a long way, and stacking the two would upscale past the source's native
      resolution */
@@ -650,11 +648,10 @@ body{
      the chips keep their own translucent background, so they stay readable. */
   .stage::after{ display:none; }
   .pill, .label{ backdrop-filter:none; }
-  .brand{ position:static; transform:none; order:1; width:100%; padding:16px 18px 12px; }
-  .brand{ animation:none; }
+  .brand{ width:100%; padding:16px 18px 12px; animation:none; }
   .col{ position:static; width:100%; padding:0 16px; display:grid; grid-template-columns:1fr 1fr; gap:.6rem; }
-  .col-left{ order:3; margin-top:14px; }
-  .col-right{ order:4; margin-bottom:8px; }
+  .col-left{ margin-top:14px; }
+  .col-right{ margin-bottom:8px; }
   .label{ width:auto; animation:none; opacity:1; justify-content:center!important; text-align:center!important; flex-direction:row!important; }
   .col-right .label{ flex-direction:row!important; }
   .label::after, .label::before{ display:none; }
@@ -662,8 +659,8 @@ body{
      the fadeUp entrance is dropped here because its keyframes assume the
      desktop translateX(-50%) centring */
   .quote-cta{
-    position:static; transform:none; order:5; align-self:center;
-    margin:18px auto 24px; animation:ctaGlow 2.6s ease-in-out infinite;
+    position:static; transform:none; align-self:center;
+    margin:18px 0 24px; animation:ctaGlow 2.6s ease-in-out infinite;
   }
 }
 @media (max-width:600px){
