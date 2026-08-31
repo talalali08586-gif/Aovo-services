@@ -9,9 +9,32 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <!-- The ?v= number is a cache-buster — bump it (in every HTML file) whenever
      the stylesheet changes, so phones and CDNs refresh their cached copy. -->
-<link rel="stylesheet" href="assets/css/style.css?v=7">
+<link rel="stylesheet" href="assets/css/style.css?v=8">
 </head>
 <body>
+
+<!-- ============================================================
+     SITE HEADER — shared across all pages: logo on the left, nav
+     links on the right. Keep the links identical on every page and
+     move the "active" class to whichever page the file belongs to.
+     On small screens the links hide behind the hamburger button;
+     the toggle logic lives at the top of assets/js/main.js.
+     ============================================================ -->
+<header class="site-header">
+  <a class="site-logo" href="index.html">
+    <img src="assets/img/logo-white.png" alt="AOVO Services logo" />
+  </a>
+  <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="siteNav" aria-label="Menu">
+    <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+  <nav class="site-nav" id="siteNav" aria-label="Site">
+    <a href="index.html" class="active">Home</a>
+    <a href="feedback.html">Feedback</a>
+    <a href="#">Other Audio Services</a>
+    <a href="about.html">About Us</a>
+    <a href="#">Contact</a>
+  </nav>
+</header>
 
 <section class="hero">
   <div class="stage">
@@ -27,16 +50,6 @@
       <img class="stage-photo" src="assets/img/hero-2.jpg" alt="AOVO voiceover artist in a professional studio" width="2688" height="1520" loading="eager" fetchpriority="high" />
     </picture>
   </div>
-
-  <!-- Site navigation — keep the links identical on every page and move the
-       "active" class to whichever page the file belongs to. -->
-  <nav class="site-nav" aria-label="Site">
-    <a href="index.html" class="active">Home</a>
-    <a href="feedback.html">Feedback</a>
-    <a href="#">Other Audio Services</a>
-    <a href="about.html">About Us</a>
-    <a href="#">Contact</a>
-  </nav>
 
   <header class="brand">
     <!-- Logo sits inside the brand block so it stays centred on the same

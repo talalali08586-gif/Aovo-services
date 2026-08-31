@@ -81,18 +81,12 @@ body{
 }
 
 /* ---------- LOGO ---------- */
-.logo{
-  position:absolute; top:clamp(10px,2vh,22px); left:clamp(10px,2vw,28px);
-  width:clamp(46px,6vw,78px); height:auto; z-index:7;
-  filter:drop-shadow(0 2px 10px rgba(0,0,0,.6));
-}
-/* Home page: the logo lives INSIDE the brand block (see index.html), so it
-   flows in normal layout centred above the title instead of floating in the
-   top-left corner. Inner pages (about, feedback) keep the corner logo via
-   the absolute rule above. */
+/* The hero's centred logo above the title (home page only). The small
+   header logo is styled separately — see the SITE HEADER section. */
 .brand .logo{
-  position:static; display:block; margin:0 auto .5rem;
-  width:clamp(64px,14vw,96px);
+  display:block; margin:0 auto .5rem;
+  width:clamp(64px,14vw,96px); height:auto;
+  filter:drop-shadow(0 2px 10px rgba(0,0,0,.6));
 }
 
 /* ---------- BRAND BLOCK ---------- */
@@ -332,16 +326,39 @@ body{
   background:var(--gold-hi); box-shadow:0 0 0 3px rgba(0,0,0,.4), 0 0 8px var(--gold-glow);
 }
 
-/* ---------- SITE NAV (shared across all pages) ----------
-   On the home page the nav sits in the hero's top-right corner, opposite
-   the logo. On inner pages (about.html) it sits in the page header row.
-   Add a link here AND in every page's <nav class="site-nav"> when a new
-   page goes live; mark the current page's link with class="active". */
+/* ---------- SITE HEADER (shared across all pages) ----------
+   A normal-height header row at the top of every page: logo on the left,
+   nav links on the right. Add a link in every page's <nav class="site-nav">
+   when a new page goes live; mark the current page's link with
+   class="active". Below 920px the links hide behind the hamburger button
+   (.nav-toggle) and drop down as a stacked column when it is tapped —
+   the few lines of toggle logic live at the top of assets/js/main.js. */
+.site-header{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:1rem; padding:.55rem clamp(14px,2.4vw,32px);
+  background:linear-gradient(180deg,#171008,#0e0b06);
+  border-bottom:1px solid var(--gold-line);
+  position:relative; z-index:10;
+}
+.site-logo{ display:block; flex:0 0 auto; }
+.site-logo img{
+  display:block; height:46px; width:auto;
+  filter:drop-shadow(0 2px 10px rgba(0,0,0,.6));
+}
 .site-nav{
-  position:absolute; top:clamp(14px,2.6vh,30px); right:clamp(12px,2.4vw,32px);
-  z-index:8; display:flex; flex-wrap:wrap; justify-content:flex-end;
+  display:flex; flex-wrap:wrap; justify-content:flex-end;
   gap:clamp(.4rem,.8vw,.7rem);
 }
+/* hamburger button — hidden on desktop, shown by the 920px media query */
+.nav-toggle{
+  display:none; align-items:center; justify-content:center;
+  width:44px; height:44px; border-radius:12px; cursor:pointer;
+  border:1px solid var(--gold-line); color:var(--gold-hi);
+  background:linear-gradient(180deg,rgba(30,21,11,.72),rgba(10,7,4,.82));
+  transition:.2s;
+}
+.nav-toggle svg{ width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; }
+.nav-toggle:hover, .nav-toggle:focus-visible{ border-color:var(--gold-hi); outline:none; }
 /* every tab is a visible gold-bordered pill (not just on hover), matching
    the label chips elsewhere on the page */
 .site-nav a{
@@ -366,13 +383,18 @@ body{
   color:#241606; text-shadow:none;
   box-shadow:0 4px 16px var(--gold-glow);
 }
+/* small screens: hide the link row behind the hamburger; tapping it drops
+   the links down as a full-width stacked column under the logo row */
+@media (max-width:920px){
+  .nav-toggle{ display:flex; }
+  .site-nav{ display:none; flex-basis:100%; flex-direction:column; align-items:stretch; padding:.4rem 0 .3rem; }
+  .site-nav.open{ display:flex; }
+  .site-nav a{ text-align:center; }
+  .site-header{ flex-wrap:wrap; }
+}
 
 /* ---------- ABOUT PAGE ---------- */
 .about-main{ width:min(94%,1060px); margin:0 auto; padding:clamp(28px,5vh,64px) 0 clamp(40px,7vh,90px); }
-
-/* inner pages: nav sits in a normal header row, not over a hero photo */
-.page-head{ position:relative; min-height:64px; }
-.page-head .logo{ position:absolute; }   /* reuses the home-page logo styling */
 
 /* intro */
 .about-intro{ text-align:center; margin-bottom:clamp(36px,6vh,72px); }
@@ -628,9 +650,6 @@ body{
      the chips keep their own translucent background, so they stay readable. */
   .stage::after{ display:none; }
   .pill, .label{ backdrop-filter:none; }
-  /* in the stacked mobile layout the nav joins the normal flow above the
-     title instead of floating over it (the hero is a flex column here) */
-  .hero .site-nav{ position:static; order:0; justify-content:center; padding:14px 16px 0; }
   .brand{ position:static; transform:none; order:1; width:100%; padding:16px 18px 12px; }
   .brand{ animation:none; }
   .col{ position:static; width:100%; padding:0 16px; display:grid; grid-template-columns:1fr 1fr; gap:.6rem; }

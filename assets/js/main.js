@@ -5,6 +5,19 @@
    file — see README.md for "how to add a new audio category").
    ============================================================ */
 
+/* ---------- 0) SITE HEADER — mobile menu toggle ----------
+   On screens narrower than 920px the header's nav links hide behind a
+   hamburger button (see the SITE HEADER section of style.css). Tapping
+   it shows/hides the links as a stacked column. */
+const navToggle = document.getElementById('navToggle');
+const siteNav   = document.getElementById('siteNav');
+if (navToggle && siteNav) {
+  navToggle.addEventListener('click', () => {
+    const isOpen = siteNav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+  });
+}
+
 /* ---------- 1) RENDER LABEL COLUMNS FROM THE MANIFEST ---------- */
 const colLeft  = document.querySelector('.col-left');
 const colRight = document.querySelector('.col-right');
@@ -136,32 +149,36 @@ function playLang(lang){
   });
 }
 
-/* events */
-// Any element with a data-demo-popup="slug" attribute opens the same demo
-// popup for that service — e.g. the About page's "Explore Our Talent Roster"
-// button (data-demo-popup="intl-voices"). The slug must match an entry in
-// data/demos.js.
-document.querySelectorAll('[data-demo-popup]').forEach(el=>{
-  el.addEventListener('click', ()=> openModal(el.dataset.demoPopup, el));
-});
-playEn.addEventListener('click', ()=> playLang('en'));
-playAr.addEventListener('click', ()=> playLang('ar'));
-closeBtn.addEventListener('click', closeModal);
-overlay.addEventListener('click', e=>{ if(e.target===overlay) closeModal(); });
-document.addEventListener('keydown', e=>{ if(e.key==='Escape' && overlay.classList.contains('open')) closeModal(); });
+/* events — only wired on pages that include the demo popup markup
+   (index.html and about.html). Pages without it (e.g. feedback.html)
+   load this file just for the header menu toggle above. */
+if (overlay) {
+  // Any element with a data-demo-popup="slug" attribute opens the same demo
+  // popup for that service — e.g. the About page's "Explore Our Talent Roster"
+  // button (data-demo-popup="intl-voices"). The slug must match an entry in
+  // data/demos.js.
+  document.querySelectorAll('[data-demo-popup]').forEach(el=>{
+    el.addEventListener('click', ()=> openModal(el.dataset.demoPopup, el));
+  });
+  playEn.addEventListener('click', ()=> playLang('en'));
+  playAr.addEventListener('click', ()=> playLang('ar'));
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', e=>{ if(e.target===overlay) closeModal(); });
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape' && overlay.classList.contains('open')) closeModal(); });
 
-player.addEventListener('play',  ()=>{ /* state handled in playLang */ });
-player.addEventListener('pause', ()=>{ if(player.ended) return; resetPlayBtns(); if(!player.ended) npText.textContent='Paused'; });
-player.addEventListener('ended', ()=>{ resetPlayBtns(); npText.textContent='Finished'; setSeekFill(100); });
-player.addEventListener('timeupdate', ()=>{
-  if(!seeking && player.duration) setSeekFill(player.currentTime/player.duration*100);
-});
+  player.addEventListener('play',  ()=>{ /* state handled in playLang */ });
+  player.addEventListener('pause', ()=>{ if(player.ended) return; resetPlayBtns(); if(!player.ended) npText.textContent='Paused'; });
+  player.addEventListener('ended', ()=>{ resetPlayBtns(); npText.textContent='Finished'; setSeekFill(100); });
+  player.addEventListener('timeupdate', ()=>{
+    if(!seeking && player.duration) setSeekFill(player.currentTime/player.duration*100);
+  });
 
-// drag-to-seek: jump immediately while dragging, and suppress timeupdate
-// fighting the handle position until the user releases it
-npSeek.addEventListener('input', ()=>{
-  seeking = true;
-  if(player.duration) player.currentTime = (npSeek.value/100)*player.duration;
-  setSeekFill(npSeek.value);
-});
-npSeek.addEventListener('change', ()=>{ seeking = false; });
+  // drag-to-seek: jump immediately while dragging, and suppress timeupdate
+  // fighting the handle position until the user releases it
+  npSeek.addEventListener('input', ()=>{
+    seeking = true;
+    if(player.duration) player.currentTime = (npSeek.value/100)*player.duration;
+    setSeekFill(npSeek.value);
+  });
+  npSeek.addEventListener('change', ()=>{ seeking = false; });
+}
