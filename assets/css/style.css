@@ -147,7 +147,7 @@ body{
 
 .label{
   position:relative; cursor:pointer; font-family:var(--sans);
-  width:clamp(186px,19vw,290px); min-height:clamp(40px,5.2vw,58px);
+  width:clamp(168px,15vw,230px); min-height:clamp(40px,5.2vw,58px);
   display:flex; align-items:center; gap:.6rem;
   padding:.65rem 1rem; border-radius:12px;
   border:1px solid var(--gold-line);
