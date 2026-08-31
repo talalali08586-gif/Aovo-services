@@ -52,7 +52,14 @@ body{
 .stage{
   position:relative;
   width:100%;
-  aspect-ratio:16/9;
+  /* wider than the photo's native 16:9 so the box stays SHORT: together
+     with the title band above it, the hero fits a laptop screen with
+     little scrolling. The crop trims dark wall and desk, not the person.
+     On screens with less height the max-height tightens the crop further
+     so header + title band + photo fit the viewport in one screen. */
+  aspect-ratio:21/9;
+  max-height:calc(100vh - 260px);
+  min-height:420px;
   background:var(--ink);
   overflow:hidden;
 }
@@ -64,17 +71,10 @@ body{
 .stage-photo{
   position:absolute; inset:0; z-index:0;
   width:100%; height:100%;
-  object-fit:cover; object-position:center 18%;
-  /* Desktop framing. This photo is 2688x1520 — almost exactly the stage's
-     own 16:9 — so object-fit:cover fits it practically edge to edge and
-     magnifies it not at all, leaving the subject small and the connector
-     lines pointing at empty room. The previous photo was 1920x1288, tall
-     enough that cover had to scale it up ~26% to fill the width, and that
-     incidental zoom is what the approved design was signed off against.
-     Zoom back in deliberately to restore it. At 1.18x a 1521px-wide stage
-     samples ~1795px of the 2688px source, so nothing is ever upscaled.
-     Mobile resets this — see the 860px breakpoint. */
-  transform:scale(1.18); transform-origin:50% 42%;
+  /* the wide desktop box crops the 16:9 photo vertically; 36% keeps the
+     subject framed with headroom above and the chin clear of the quote
+     button below. Mobile overrides this — see the 860px breakpoint. */
+  object-fit:cover; object-position:center 36%;
   display:block;
 }
 /* atmosphere: darken edges + warm vignette so gold pops over photo */
@@ -97,7 +97,7 @@ body{
    the same darkness, so band and photo read as one piece. */
 .brand{
   text-align:center; width:min(92%,820px); margin:0 auto;
-  padding:clamp(16px,2.6vh,36px) 0 clamp(12px,2vh,26px);
+  padding:clamp(10px,1.8vh,22px) 0 clamp(8px,1.4vh,16px);
   animation:fadeDown .9s ease both;
 }
 .brand h1{
@@ -596,11 +596,10 @@ body{
      of Hostinger's CDN image optimizer, so the CDN passes it through
      untouched instead of shrinking it (shrink-then-stretch is what made
      the photo look blurry on phones). */
-  .stage{ aspect-ratio:4/3.4; }
-  /* drop the desktop zoom: the tall mobile crop already magnifies the photo
-     a long way, and stacking the two would upscale past the source's native
-     resolution */
-  .stage-photo{ object-position:center 20%; transform:none; }
+  /* the height caps are a desktop fit-the-viewport measure; the stacked
+     phone layout scrolls naturally, so the crop ratio alone rules here */
+  .stage{ aspect-ratio:4/3.4; max-height:none; min-height:0; }
+  .stage-photo{ object-position:center 20%; }
 
   /* ---- THE MOBILE BLUR FIX ----------------------------------------------
      This is what actually caused the photo to look soft on Android phones
