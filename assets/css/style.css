@@ -91,15 +91,6 @@ body{
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* ---------- LOGO ---------- */
-/* The hero's centred logo above the title (home page only). The small
-   header logo is styled separately — see the SITE HEADER section. */
-.brand .logo{
-  display:block; margin:0 auto .5rem;
-  width:clamp(64px,14vw,96px); height:auto;
-  filter:drop-shadow(0 2px 10px rgba(0,0,0,.6));
-}
-
 /* ---------- BRAND BLOCK ----------
    A centred band in normal flow between the header and the photo. The page
    background shows through it, and the photo's top vignette fades up into
@@ -393,12 +384,6 @@ body{
 
 /* intro */
 .about-intro{ text-align:center; margin-bottom:clamp(36px,6vh,72px); }
-/* the centred gold logo above the intro title — shared by the About and
-   Feedback intros so both pages get the same treatment */
-.intro-logo{
-  width:clamp(84px,11vw,132px); height:auto; margin-bottom:.9rem;
-  filter:drop-shadow(0 4px 18px rgba(0,0,0,.6));
-}
 .about-intro h1{
   font-family:var(--serif); font-weight:700; line-height:1.08;
   font-size:clamp(1.7rem,4.6vw,3.1rem); letter-spacing:.5px;
