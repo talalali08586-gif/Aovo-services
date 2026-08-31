@@ -32,4 +32,9 @@ const DEMOS = [
   { slug: 'video-games',       label: 'Video Games',                    en: 'audio/video-games-en.mp3',       ar: 'audio/video-games-ar.mp3' },
   { slug: 'youtube-social',    label: 'YouTube & Social Media',         en: 'audio/youtube-social-en.mp3',    ar: 'audio/youtube-social-ar.mp3' },
   { slug: 'old-man',           label: 'Old Man Voice',                  en: 'audio/old-man-en.mp3' },
+  /* Audio samples for this category are not uploaded yet. Drop
+     audio-services-en.mp3 (and/or -ar.mp3) into audio/ and the popup
+     starts working — remove the "ar" (or "en") field below if that
+     language never gets recorded. */
+  { slug: 'audio-services',    label: 'Audio Services',                 en: 'audio/audio-services-en.mp3',    ar: 'audio/audio-services-ar.mp3' },
 ];
