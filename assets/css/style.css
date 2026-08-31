@@ -418,10 +418,10 @@ body{
 
 /* founder bios: photo + text side by side, photo side alternates.
    The photo column is roughly half its original 340px width (client
-   request) and top-aligns with the text block instead of centring. */
+   request) and centres vertically against the text block. */
 .bio{
   display:grid; grid-template-columns:minmax(140px,180px) 1fr;
-  gap:clamp(20px,3.5vw,48px); align-items:start;
+  gap:clamp(20px,3.5vw,48px); align-items:center;
   margin-bottom:clamp(36px,6vh,72px);
 }
 .bio.flip{ grid-template-columns:1fr minmax(140px,180px); }
