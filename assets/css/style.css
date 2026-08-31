@@ -492,9 +492,10 @@ body{
    don't trail off into 1–4 word orphan lines. text-wrap:pretty additionally
    lets newer browsers rebalance breaks to avoid a short last line entirely.
    The narrow mobile column (≤720px) already wraps evenly, so it keeps the
-   default alignment. */
+   default alignment. The closing "Ready to Be Heard?" card is excluded:
+   its short description stays centred like the rest of that card. */
 @media (min-width:721px){
-  .about-intro p, .bio-text p, .team p, .why-card p, .closing p{
+  .about-intro p, .bio-text p, .team p, .why-card p{
     text-align:justify; text-wrap:pretty;
   }
 }
