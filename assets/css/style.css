@@ -564,6 +564,75 @@ body{
   .audio-services-grid{ grid-template-columns:1fr; }
 }
 
+/* ---------- CONTACT / ORDER PAGE ----------
+   The visual form uses the same gold-edged cards as the secondary pages.
+   Native inputs retain their browser validation for reliable, dependency-free
+   required-field and email checks; the page script adds the conditional
+   "Other" category field and holds submission until delivery is configured. */
+.contact-main{ width:min(94%,920px); margin:0 auto; padding:clamp(32px,6vh,76px) 0 clamp(48px,8vh,96px); }
+.contact-intro{ text-align:center; max-width:720px; margin:0 auto clamp(28px,4.5vh,52px); }
+.contact-intro h1{
+  font-family:var(--serif); font-weight:700; line-height:1.08;
+  font-size:clamp(1.8rem,5vw,3.35rem); letter-spacing:.6px;
+  background:linear-gradient(180deg,#fff6da 4%,var(--gold-hi) 26%,var(--gold) 54%,var(--gold-deep) 92%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  filter:drop-shadow(0 4px 14px rgba(0,0,0,.55)); margin-bottom:.85rem;
+}
+.contact-intro p{ color:var(--txt-dim); line-height:1.65; font-size:clamp(.92rem,1.6vw,1.05rem); }
+.contact-form{
+  padding:clamp(22px,4vw,44px); border:1px solid var(--gold-line); border-radius:20px;
+  background:linear-gradient(180deg,rgba(24,17,9,.88),rgba(10,7,4,.95));
+  box-shadow:0 0 0 1px rgba(0,0,0,.42) inset, 0 18px 46px rgba(0,0,0,.5), 0 0 26px rgba(216,178,90,.1);
+}
+.contact-form-header{ display:flex; align-items:flex-start; gap:.85rem; margin-bottom:1.7rem; }
+.contact-form-header svg{ width:30px; height:30px; flex:0 0 auto; fill:var(--gold); filter:drop-shadow(0 0 7px var(--gold-glow)); }
+.contact-form-header h2{ font-family:var(--serif); color:var(--gold-hi); font-size:clamp(1.2rem,2.2vw,1.5rem); margin:.1rem 0 .3rem; }
+.contact-form-header p{ color:var(--txt-dim); line-height:1.5; font-size:.9rem; }
+.contact-field-grid{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem 1.15rem; }
+.contact-field{ display:flex; flex-direction:column; gap:.45rem; }
+.contact-field.full{ grid-column:1 / -1; }
+.contact-field label, .contact-field legend{ color:var(--gold-hi); font-size:.82rem; font-weight:600; letter-spacing:.45px; }
+.contact-field .optional{ color:var(--txt-dim); font-weight:400; }
+.contact-field input, .contact-field select, .contact-field textarea{
+  width:100%; min-height:46px; border:1px solid rgba(216,178,90,.42); border-radius:9px;
+  padding:.75rem .85rem; color:var(--txt); background:rgba(7,5,3,.62);
+  font:400 .96rem var(--sans); line-height:1.4; box-shadow:0 0 0 1px rgba(0,0,0,.32) inset;
+  transition:border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.contact-field textarea{ min-height:142px; resize:vertical; }
+.contact-field select{ appearance:auto; }
+.contact-field input::placeholder, .contact-field textarea::placeholder{ color:#a89878; opacity:1; }
+.contact-field input:focus, .contact-field select:focus, .contact-field textarea:focus{
+  outline:none; border-color:var(--gold-hi); background:rgba(20,14,7,.75);
+  box-shadow:0 0 0 3px rgba(216,178,90,.16), 0 0 0 1px rgba(0,0,0,.32) inset;
+}
+.contact-field input:focus:invalid, .contact-field select:focus:invalid{ border-color:#df9a78; }
+.contact-deadline{ border:0; padding:0; margin:1.45rem 0 0; min-width:0; }
+.contact-deadline + .contact-field{ margin-top:1.45rem; }
+.contact-deadline legend{ margin-bottom:.65rem; }
+.deadline-options{ display:grid; grid-template-columns:repeat(3,1fr); gap:.7rem; }
+.deadline-option{ position:relative; }
+.deadline-option input{ position:absolute; opacity:0; pointer-events:none; }
+.deadline-option label{
+  min-height:54px; display:flex; align-items:center; justify-content:center; padding:.6rem .75rem; text-align:center;
+  border:1px solid rgba(216,178,90,.42); border-radius:10px; color:var(--txt-dim); cursor:pointer;
+  background:rgba(7,5,3,.55); font-size:.84rem; line-height:1.25; transition:.2s;
+}
+.deadline-option input:checked + label{ border-color:var(--gold); color:#241606; background:linear-gradient(180deg,var(--gold-hi),var(--gold)); box-shadow:0 0 16px var(--gold-glow); }
+.deadline-option input:focus-visible + label{ outline:2px solid var(--gold-hi); outline-offset:2px; }
+.contact-submit-row{ display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:1rem; margin-top:1.5rem; }
+.contact-submit-row .btn-cta{ text-decoration:none; }
+.contact-submit-row .btn-cta svg{ fill:currentColor; }
+.contact-required-note{ color:var(--txt-dim); font-size:.8rem; }
+.form-status{ flex:1 1 100%; min-height:1.4em; color:var(--gold-hi); font-size:.9rem; line-height:1.5; }
+.form-status.config-notice{ padding:.8rem .95rem; border:1px solid var(--gold-line); border-radius:9px; background:rgba(83,60,20,.25); }
+
+@media (max-width:640px){
+  .contact-field-grid, .deadline-options{ grid-template-columns:1fr; }
+  .contact-submit-row{ align-items:stretch; }
+  .contact-submit-row .btn-cta{ justify-content:center; }
+}
+
 /* ---------- FEEDBACK PAGE — testimonial slider ----------
    Pure CSS/JS carousel (no libraries): the track is a flex row of
    full-width slides, moved with translateX by the small script at the

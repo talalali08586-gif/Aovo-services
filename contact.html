@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact &amp; Order &mdash; AOVO Services</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<!-- The ?v= number is a cache-buster &mdash; keep it in sync across all pages. -->
+<link rel="stylesheet" href="assets/css/style.css?v=15">
+</head>
+<body>
+
+<!-- ============================================================
+     SITE HEADER &mdash; shared across all pages. Keep the links identical;
+     only the active class changes for the page being viewed.
+     ============================================================ -->
+<header class="site-header">
+  <a class="site-logo" href="index.html">
+    <img src="assets/img/logo-white.png" alt="AOVO Services logo" />
+  </a>
+  <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="siteNav" aria-label="Menu">
+    <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+  <nav class="site-nav" id="siteNav" aria-label="Site">
+    <a href="index.html">Home</a>
+    <a href="feedback.html">Feedback</a>
+    <a href="audio-services.html">Audio Services</a>
+    <a href="about.html">About Us</a>
+    <a href="contact.html" class="active">Contact</a>
+  </nav>
+</header>
+
+<main class="contact-main">
+
+  <!-- ============================================================
+       INTRO
+       ============================================================ -->
+  <section class="contact-intro">
+    <p class="audio-kicker">Start Your Project</p>
+    <h1>CONTACT &amp; ORDER</h1>
+    <p>Tell us what you&rsquo;re creating and the AOVO Services team will help shape the right voice and audio solution for your project.</p>
+  </section>
+
+  <!-- ============================================================
+       PROJECT FORM
+       Native required and email validation work without a server. The
+       submit handler below deliberately does not send data until the client
+       chooses AOVO&rsquo;s delivery email and a submission method.
+       ============================================================ -->
+  <form class="contact-form" id="contactForm" novalidate>
+    <div class="contact-form-header">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 1 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-3.08A7 7 0 0 0 19 11h-2z"/></svg>
+      <div><h2>Tell Us About Your Project</h2><p>We&rsquo;ll use these details to understand your scope and prepare a tailored quote.</p></div>
+    </div>
+
+    <div class="contact-field-grid">
+      <div class="contact-field">
+        <label for="fullName">Full Name <span aria-hidden="true">*</span></label>
+        <input id="fullName" name="fullName" type="text" autocomplete="name" required />
+      </div>
+      <div class="contact-field">
+        <label for="email">Email Address <span aria-hidden="true">*</span></label>
+        <input id="email" name="email" type="email" autocomplete="email" required />
+      </div>
+      <div class="contact-field">
+        <label for="company">Company / Organization Name <span class="optional">(optional)</span></label>
+        <input id="company" name="company" type="text" autocomplete="organization" />
+      </div>
+      <div class="contact-field">
+        <label for="wordCount">Estimated Script Word Count <span class="optional">(optional)</span></label>
+        <input id="wordCount" name="wordCount" type="number" min="1" inputmode="numeric" placeholder="e.g. 500" />
+      </div>
+      <div class="contact-field full">
+        <label for="projectType">Project Type / Category</label>
+        <select id="projectType" name="projectType">
+          <option value="">Select a category</option>
+          <option>Commercial (TV, Radio, Online Ads)</option>
+          <option>Documentaries</option>
+          <option>Corporate / Explainer Video</option>
+          <option>E-Learning / Training</option>
+          <option>Video Games / Animation</option>
+          <option>IVR / Phone Systems</option>
+          <option>Audiobook / Audio Drama</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="contact-field full" id="otherProjectField" hidden>
+        <label for="otherProject">Other Project Type <span aria-hidden="true">*</span></label>
+        <input id="otherProject" name="otherProject" type="text" disabled placeholder="Please describe your project category" />
+      </div>
+    </div>
+
+    <fieldset class="contact-deadline">
+      <legend>Target Deadline</legend>
+      <div class="deadline-options">
+        <div class="deadline-option"><input id="deadline-24" name="deadline" type="radio" value="Within 24 hrs" /><label for="deadline-24">Within 24 hrs</label></div>
+        <div class="deadline-option"><input id="deadline-3days" name="deadline" type="radio" value="Within 3 days" /><label for="deadline-3days">Within 3 days</label></div>
+        <div class="deadline-option"><input id="deadline-flexible" name="deadline" type="radio" value="Flexible" /><label for="deadline-flexible">Flexible</label></div>
+      </div>
+    </fieldset>
+
+    <div class="contact-field full">
+      <label for="message">Project Details / Message <span class="optional">(optional)</span></label>
+      <textarea id="message" name="message" placeholder="Tell us about your script, intended audience, preferred style, languages, or anything else helpful."></textarea>
+    </div>
+
+    <div class="contact-submit-row">
+      <p class="contact-required-note"><span aria-hidden="true">*</span> Required fields</p>
+      <button class="btn-cta" type="submit"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4l18 8-18 8 3-8-3-8zm3 8h9"/></svg>Request Your Quote</button>
+      <p class="form-status" id="formStatus" aria-live="polite"></p>
+    </div>
+  </form>
+</main>
+
+<!-- Shared script handles the responsive header. data/demos.js is loaded so
+     main.js can safely use the shared manifest on this non-demo page. -->
+<script src="data/demos.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+/* ============================================================
+   CONTACT FORM DELIVERY TODO
+   Once the client confirms AOVO's email address and whether to use mailto,
+   Formspree, or another approved service, replace the configuration notice
+   inside this submit handler with that authorised delivery method.
+   ============================================================ */
+(function(){
+  var form = document.getElementById('contactForm');
+  var projectType = document.getElementById('projectType');
+  var otherField = document.getElementById('otherProjectField');
+  var otherInput = document.getElementById('otherProject');
+  var status = document.getElementById('formStatus');
+
+  projectType.addEventListener('change', function(){
+    var isOther = projectType.value === 'other';
+    otherField.hidden = !isOther;
+    otherInput.disabled = !isOther;
+    otherInput.required = isOther;
+    if (!isOther) otherInput.value = '';
+  });
+
+  form.addEventListener('submit', function(event){
+    event.preventDefault();
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    // TODO: Send the validated form only after client-approved delivery is set.
+    status.textContent = 'Thank you. Form delivery is being configured; please check back shortly to submit your project request.';
+    status.classList.add('config-notice');
+  });
+})();
+</script>
+</body>
+</html>
