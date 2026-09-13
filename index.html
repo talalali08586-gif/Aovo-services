@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <!-- The ?v= number is a cache-buster — bump it (in every HTML file) whenever
      the stylesheet changes, so phones and CDNs refresh their cached copy. -->
-<link rel="stylesheet" href="assets/css/style.css?v=12">
+<link rel="stylesheet" href="assets/css/style.css?v=13">
 </head>
 <body>
 
@@ -43,7 +43,13 @@
        vignette blends into the band's dark background, so the hero still
        reads as one continuous composition. -->
   <header class="brand">
-    <h1>AOVO Services</h1>
+    <!-- DESKTOP BRAND LOCKUP — the large logo and title share one flex parent,
+         keeping their spacing fixed as the hero scales between screen widths.
+         The compact site-header logo remains the only logo shown on mobile. -->
+    <div class="brand-lockup">
+      <img class="brand-logo" src="assets/img/logo-white.png" alt="" />
+      <h1>AOVO Services</h1>
+    </div>
     <div class="pill">
       <svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 1 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-3.08A7 7 0 0 0 19 11h-2z"/></svg>
       International Voiceover and Audio Services

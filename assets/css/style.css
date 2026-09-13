@@ -94,11 +94,22 @@ body{
 /* ---------- BRAND BLOCK ----------
    A centred band in normal flow between the header and the photo. The page
    background shows through it, and the photo's top vignette fades up into
-   the same darkness, so band and photo read as one piece. */
+   the same darkness, so band and photo read as one piece. On desktop, the
+   logo and title are one flex lockup: centring and responsive sizing apply
+   to the pair, so the logo cannot drift away from the title. */
 .brand{
-  text-align:center; width:min(92%,820px); margin:0 auto;
+  text-align:center; width:min(92%,960px); margin:0 auto;
   padding:clamp(10px,1.8vh,22px) 0 clamp(8px,1.4vh,16px);
   animation:fadeDown .9s ease both;
+}
+.brand-lockup{
+  display:flex; align-items:center; justify-content:center;
+  gap:clamp(14px,1.8vw,28px);
+}
+.brand-logo{
+  display:block; flex:0 0 auto;
+  width:clamp(84px,8.5vw,136px); height:auto;
+  filter:drop-shadow(0 4px 14px rgba(0,0,0,.55));
 }
 .brand h1{
   font-family:var(--serif); font-weight:700;
@@ -634,6 +645,8 @@ body{
   .stage::after{ display:none; }
   .pill, .label{ backdrop-filter:none; }
   .brand{ width:100%; padding:16px 18px 12px; animation:none; }
+  /* The large hero logo is intentionally desktop-only; the header logo stays. */
+  .brand-logo{ display:none; }
   .col{ position:static; width:100%; padding:0 16px; display:grid; grid-template-columns:1fr 1fr; gap:.6rem; }
   .col-left{ margin-top:14px; }
   .col-right{ margin-bottom:8px; }
