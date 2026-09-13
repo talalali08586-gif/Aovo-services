@@ -504,6 +504,66 @@ body{
   .why-grid{ grid-template-columns:1fr; }
 }
 
+/* ---------- AUDIO SERVICES PAGE ----------
+   Eight square-icon cards keep the technical services easy to scan without
+   relying on round bullet points. The icons are inline SVGs in the page, so
+   this section needs no icon library, extra image requests, or dependency. */
+.audio-main{ width:min(94%,1120px); margin:0 auto; padding:clamp(32px,6vh,76px) 0 clamp(48px,8vh,96px); }
+.audio-intro{ text-align:center; max-width:780px; margin:0 auto clamp(30px,5vh,58px); }
+.audio-kicker{
+  color:var(--gold); font-size:.72rem; font-weight:600; letter-spacing:2px;
+  text-transform:uppercase; margin-bottom:.7rem;
+}
+.audio-intro h1{
+  font-family:var(--serif); font-weight:700; line-height:1.08;
+  font-size:clamp(1.8rem,5vw,3.5rem); letter-spacing:.6px;
+  background:linear-gradient(180deg,#fff6da 4%,var(--gold-hi) 26%,var(--gold) 54%,var(--gold-deep) 92%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  filter:drop-shadow(0 4px 14px rgba(0,0,0,.55)); margin-bottom:.9rem;
+}
+.audio-tagline{ color:var(--gold-hi); font-family:var(--serif); font-size:clamp(1rem,2.1vw,1.3rem); line-height:1.45; margin-bottom:.8rem; }
+.audio-lede{ color:var(--txt-dim); line-height:1.65; font-size:clamp(.92rem,1.6vw,1.06rem); }
+.audio-services-grid{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(14px,2vw,24px); }
+.audio-service-card{
+  display:grid; grid-template-columns:auto 1fr; gap:1rem; align-items:start;
+  padding:clamp(18px,2.4vw,28px); border:1px solid var(--gold-line); border-radius:16px;
+  background:linear-gradient(145deg,rgba(28,20,10,.86),rgba(10,7,4,.94));
+  box-shadow:0 0 0 1px rgba(0,0,0,.38) inset, 0 12px 34px rgba(0,0,0,.4);
+  transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.audio-service-card:hover{ transform:translateY(-3px); border-color:var(--gold); box-shadow:0 0 0 1px rgba(0,0,0,.38) inset, 0 16px 38px rgba(0,0,0,.48), 0 0 20px var(--gold-glow); }
+.audio-icon{
+  width:48px; height:48px; flex:0 0 48px; border:1px solid var(--gold-line); border-radius:11px;
+  display:grid; place-items:center; color:var(--gold-hi);
+  background:linear-gradient(180deg,rgba(74,53,21,.45),rgba(22,15,7,.7));
+  box-shadow:0 0 14px rgba(216,178,90,.12) inset;
+}
+.audio-icon svg{ width:27px; height:27px; fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
+.audio-icon .audio-fill{ fill:currentColor; stroke:none; }
+.audio-service-card h2{ color:var(--gold-hi); font-family:var(--serif); font-weight:600; font-size:clamp(1rem,1.7vw,1.2rem); line-height:1.3; margin:.1rem 0 .45rem; }
+.audio-service-card p{ color:var(--txt-dim); font-size:.94rem; line-height:1.58; }
+.audio-demo-placeholder{
+  margin:clamp(30px,5vh,58px) auto 0; max-width:800px; padding:clamp(22px,4vw,38px);
+  text-align:center; border:1px dashed var(--gold-line); border-radius:16px;
+  background:rgba(17,12,7,.5);
+}
+.audio-demo-placeholder svg{ width:31px; height:31px; fill:var(--gold); margin-bottom:.7rem; filter:drop-shadow(0 0 8px var(--gold-glow)); }
+.audio-demo-placeholder h2{ font-family:var(--serif); color:var(--gold-hi); font-size:1.18rem; margin-bottom:.45rem; }
+.audio-demo-placeholder p{ color:var(--txt-dim); line-height:1.6; font-size:.92rem; }
+.audio-cta{
+  margin-top:clamp(32px,6vh,72px); text-align:center; padding:clamp(28px,5vw,52px) clamp(20px,5vw,64px);
+  border:1px solid var(--gold-line); border-radius:20px;
+  background:radial-gradient(500px 180px at 50% 0%,rgba(154,111,39,.28),transparent 70%),linear-gradient(180deg,rgba(31,22,11,.92),rgba(10,7,4,.96));
+  box-shadow:0 0 0 1px rgba(0,0,0,.42) inset, 0 18px 44px rgba(0,0,0,.5), 0 0 30px var(--gold-glow);
+}
+.audio-cta h2{ font-family:var(--serif); color:var(--gold-hi); font-size:clamp(1.35rem,3vw,2rem); margin-bottom:.7rem; }
+.audio-cta p{ max-width:710px; margin:0 auto 1.35rem; color:var(--txt-dim); line-height:1.65; font-size:clamp(.92rem,1.6vw,1.05rem); }
+.audio-cta .btn-cta{ text-decoration:none; }
+
+@media (max-width:720px){
+  .audio-services-grid{ grid-template-columns:1fr; }
+}
+
 /* ---------- FEEDBACK PAGE — testimonial slider ----------
    Pure CSS/JS carousel (no libraries): the track is a flex row of
    full-width slides, moved with translateX by the small script at the

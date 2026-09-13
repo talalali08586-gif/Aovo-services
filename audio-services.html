@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Audio Services &mdash; AOVO Services</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<!-- The ?v= number is a cache-buster &mdash; keep it in sync across all pages. -->
+<link rel="stylesheet" href="assets/css/style.css?v=14">
+</head>
+<body>
+
+<!-- ============================================================
+     SITE HEADER &mdash; shared across all pages. Keep the links identical;
+     only the active class changes for the page being viewed.
+     ============================================================ -->
+<header class="site-header">
+  <a class="site-logo" href="index.html">
+    <img src="assets/img/logo-white.png" alt="AOVO Services logo" />
+  </a>
+  <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="siteNav" aria-label="Menu">
+    <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+  <nav class="site-nav" id="siteNav" aria-label="Site">
+    <a href="index.html">Home</a>
+    <a href="feedback.html">Feedback</a>
+    <a href="audio-services.html" class="active">Audio Services</a>
+    <a href="about.html">About Us</a>
+    <a href="#">Contact Us</a>
+  </nav>
+</header>
+
+<main class="audio-main">
+
+  <!-- ============================================================
+       INTRO &mdash; brief overview of the technical post-production offer.
+       ============================================================ -->
+  <section class="audio-intro">
+    <p class="audio-kicker">Technical Post-Production</p>
+    <h1>AOVO AUDIO SERVICES</h1>
+    <p class="audio-tagline">Don&rsquo;t let poor audio ruin great content.</p>
+    <p class="audio-lede">AOVO Services offers a multitude of expert fixes and technical post-production extras for your audio:</p>
+  </section>
+
+  <!-- ============================================================
+       SERVICE CARDS &mdash; inline SVGs deliberately replace bullet points.
+       ============================================================ -->
+  <section class="audio-services-grid" aria-label="Audio services">
+    <article class="audio-service-card">
+      <span class="audio-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12h2l2-6 3 12 3-16 2 10h4"/><path d="M3 18h18"/></svg></span>
+      <div><h2>Audio Cleaning &amp; Noise Reduction</h2><p>Fix AC hum, traffic, room reverb, and other distractions that compete with a clear recording.</p></div>
+    </article>
+    <article class="audio-service-card">
+      <span class="audio-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 5h14v10H9l-4 4V5z"/><path d="M9 10h.01M12 10h.01M15 10h.01"/><path d="M18 19l3 3"/></svg></span>
+      <div><h2>Dialogue Repair &amp; De-Clicking</h2><p>Remove mouth clicks, pops, awkward pauses, and excess breaths while preserving a natural delivery.</p></div>
+    </article>
+    <article class="audio-service-card">
+      <span class="audio-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/><path d="M5 3l-2 2M19 3l2 2"/></svg></span>
+      <div><h2>Timing &amp; Pacing Fixes</h2><p>Trim pauses and remove filler words such as ums and ahs for a smoother, more confident pace.</p></div>
+    </article>
+    <article class="audio-service-card">
+      <span class="audio-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="12" height="14" rx="1"/><path class="audio-fill" d="M9 9l4 3-4 3z"/><path d="M18 9v6M21 7v10"/></svg></span>
+      <div><h2>Apply Audio to Video</h2><p>Add an edited, synchronized audio track to your videos for a polished final production.</p></div>
+    </article>
+    <article class="audio-service-card">
+      <span class="audio-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 5v11.5a2.5 2.5 0 1 1-2-2.45"/><path d="M10 5l8-2v11.5a2.5 2.5 0 1 1-2-2.45"/><path d="M10 8l8-2"/></svg></span>
+      <div><h2>Separate Stems from a Song</h2><p>Isolate or remove vocals, music, and instruments to create the stems your project needs.</p></div>
+    </article>
+    <article class="audio-service-card">
+      <span class="audio-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 15h2l2-5 3 8 2-12 2 7h5"/><path d="M18 3v3M16.5 4.5h3"/></svg></span>
+      <div><h2>Audio Restoration</h2><p>Turn low-quality phone, Zoom, and meeting audio into a clearer, higher-quality listening experience.</p></div>
+    </article>
+    <article class="audio-service-card">
+      <span class="audio-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 5v14M12 5v14M19 5v14"/><path d="M3 9h4M10 15h4M17 11h4"/><circle class="audio-fill" cx="5" cy="9" r="2"/><circle class="audio-fill" cx="12" cy="15" r="2"/><circle class="audio-fill" cx="19" cy="11" r="2"/></svg></span>
+      <div><h2>Mixing &amp; Mastering</h2><p>Bring depth, balance, and clarity to every recording so it is ready to be heard at its best.</p></div>
+    </article>
+    <article class="audio-service-card">
+      <span class="audio-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h11v8H9l-4 3V5zM20 9v10H9"/><path d="M7 9h5M12 7c-1.5 3-3 4-5 5M9 7c.5 2 1.5 3.5 3 5"/></svg></span>
+      <div><h2>Translations</h2><p>English&harr;Arabic script translation for audio projects that need clear, natural localization.</p></div>
+    </article>
+  </section>
+
+  <!-- ============================================================
+       DEMO PLACEHOLDER &mdash; replace this with per-service native audio
+       players once the client supplies the audio demonstrations.
+       ============================================================ -->
+  <section class="audio-demo-placeholder" aria-labelledby="demo-placeholder-title">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12.2a3.4 3.4 0 1 1-2-3.1V6l10-2v9.2a3.4 3.4 0 1 1-2-3.1V4"/></svg>
+    <h2 id="demo-placeholder-title">Audio Service Demos</h2>
+    <p>Per-service before-and-after audio demonstrations will appear here once client-approved demo files are supplied.</p>
+  </section>
+
+  <!-- ============================================================
+       CTA &mdash; contact destination will be wired to contact.html in Phase 4.
+       ============================================================ -->
+  <section class="audio-cta">
+    <h2>Send Us Your Messy Audio</h2>
+    <p>Got a recording with issues that need cleaned up? Send your file and we&rsquo;ll run a free sample test restore so you can hear the difference before committing.</p>
+    <a class="btn-cta" href="#">Request a Free Test Restore</a>
+  </section>
+</main>
+
+<!-- Shared script only handles the responsive header on this page. -->
+<script src="data/demos.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
