@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <!-- The ?v= number is a cache-buster &mdash; keep it in sync across all pages. -->
-<link rel="stylesheet" href="assets/css/style.css?v=15">
+<link rel="stylesheet" href="assets/css/style.css?v=16">
 </head>
 <body>
 
@@ -51,14 +51,17 @@
     <article class="audio-service-card">
       <span class="audio-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12h2l2-6 3 12 3-16 2 10h4"/><path d="M3 18h18"/></svg></span>
       <div><h2>Audio Cleaning &amp; Noise Reduction</h2><p>Fix AC hum, traffic, room reverb, and other distractions that compete with a clear recording.</p></div>
+      <div class="audio-service-demo" data-audio-service-demo="audio-cleaning-noise-reduction"></div>
     </article>
     <article class="audio-service-card">
       <span class="audio-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 5h14v10H9l-4 4V5z"/><path d="M9 10h.01M12 10h.01M15 10h.01"/><path d="M18 19l3 3"/></svg></span>
       <div><h2>Dialogue Repair &amp; De-Clicking</h2><p>Remove mouth clicks, pops, awkward pauses, and excess breaths while preserving a natural delivery.</p></div>
+      <div class="audio-service-demo" data-audio-service-demo="de-clicking"></div>
     </article>
     <article class="audio-service-card">
       <span class="audio-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/><path d="M5 3l-2 2M19 3l2 2"/></svg></span>
       <div><h2>Timing &amp; Pacing Fixes</h2><p>Trim pauses and remove filler words such as ums and ahs for a smoother, more confident pace.</p></div>
+      <div class="audio-service-demo" data-audio-service-demo="timing-pacing-fixes"></div>
     </article>
     <article class="audio-service-card">
       <span class="audio-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="12" height="14" rx="1"/><path class="audio-fill" d="M9 9l4 3-4 3z"/><path d="M18 9v6M21 7v10"/></svg></span>
@@ -67,10 +70,12 @@
     <article class="audio-service-card">
       <span class="audio-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 5v11.5a2.5 2.5 0 1 1-2-2.45"/><path d="M10 5l8-2v11.5a2.5 2.5 0 1 1-2-2.45"/><path d="M10 8l8-2"/></svg></span>
       <div><h2>Separate Stems from a Song</h2><p>Isolate or remove vocals, music, and instruments to create the stems your project needs.</p></div>
+      <div class="audio-service-demo" data-audio-service-demo="separating-song-stems"></div>
     </article>
     <article class="audio-service-card">
       <span class="audio-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 15h2l2-5 3 8 2-12 2 7h5"/><path d="M18 3v3M16.5 4.5h3"/></svg></span>
       <div><h2>Audio Restoration</h2><p>Turn low-quality phone, Zoom, and meeting audio into a clearer, higher-quality listening experience.</p></div>
+      <div class="audio-service-demo" data-audio-service-demo="audio-restoration"></div>
     </article>
     <article class="audio-service-card">
       <span class="audio-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 5v14M12 5v14M19 5v14"/><path d="M3 9h4M10 15h4M17 11h4"/><circle class="audio-fill" cx="5" cy="9" r="2"/><circle class="audio-fill" cx="12" cy="15" r="2"/><circle class="audio-fill" cx="19" cy="11" r="2"/></svg></span>
@@ -83,16 +88,6 @@
   </section>
 
   <!-- ============================================================
-       DEMO PLACEHOLDER &mdash; replace this with per-service native audio
-       players once the client supplies the audio demonstrations.
-       ============================================================ -->
-  <section class="audio-demo-placeholder" aria-labelledby="demo-placeholder-title">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12.2a3.4 3.4 0 1 1-2-3.1V6l10-2v9.2a3.4 3.4 0 1 1-2-3.1V4"/></svg>
-    <h2 id="demo-placeholder-title">Audio Service Demos</h2>
-    <p>Per-service before-and-after audio demonstrations will appear here once client-approved demo files are supplied.</p>
-  </section>
-
-  <!-- ============================================================
        CTA &mdash; contact destination will be wired to contact.html in Phase 4.
        ============================================================ -->
   <section class="audio-cta">
@@ -102,8 +97,10 @@
   </section>
 </main>
 
-<!-- Shared script only handles the responsive header on this page. -->
+<!-- The Audio Services manifest renders a player only where a matching sample exists. -->
 <script src="data/demos.js"></script>
+<script src="data/audio-services-demos.js"></script>
 <script src="assets/js/main.js"></script>
+<script src="assets/js/audio-services.js"></script>
 </body>
 </html>

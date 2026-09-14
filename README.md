@@ -93,6 +93,23 @@ with zero setup.
 
 That's it — no other file needs to change.
 
+## How to add an Audio Services page sample
+
+The technical service cards use their own manifest,
+`data/audio-services-demos.js`, so adding a sample never changes the
+approved set of 12 Home-page labels.
+
+1. Convert the approved WAV to a 128kbps MP3 and save it in `audio/` with
+   a lowercase, hyphenated name ending in `-en.mp3` (or `-ar.mp3` when an
+   Arabic version is supplied).
+2. Add that path and the card's slug to `AUDIO_SERVICE_DEMOS` in
+   `data/audio-services-demos.js`.
+3. Add the same slug as `data-audio-service-demo` on the matching card in
+   `audio-services.html` if it is not already there.
+
+Cards without a listed sample simply show no player until the client supplies
+one. The current files are English-only.
+
 ## Browser support
 
 Tested on Chrome, Firefox, Safari, Edge, and mobile (iOS/Android). Uses
