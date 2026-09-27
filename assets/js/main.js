@@ -61,6 +61,7 @@ const DEMO_MAP = Object.fromEntries(DEMOS.map(d => [d.slug, d]));
 const overlay   = document.getElementById('overlay');
 const closeBtn  = document.getElementById('closeBtn');
 const mTitle    = document.getElementById('m-title');
+const mDescription = document.getElementById('m-description');
 const langEn    = document.querySelector('.lang-card.en');
 const langAr    = document.querySelector('.lang-card.ar');
 const playEn    = document.getElementById('play-en');
@@ -106,6 +107,10 @@ function openModal(key, triggerEl){
   current = key;
   lastTrigger = triggerEl || null;
   mTitle.textContent = d.label;
+  // Guarded because not every page that reuses this popup is guaranteed to
+  // include the optional description paragraph. Without the guard, a page
+  // missing #m-description would throw here and the popup would never open.
+  if(mDescription) mDescription.textContent = d.description || 'Listen to a sample demo or download the file.';
   setLangCard(langEn, dlEn, d.label, 'EN', d.en);
   setLangCard(langAr, dlAr, d.label, 'AR', d.ar);
   stopAudio();

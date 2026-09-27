@@ -34,5 +34,5 @@ const DEMOS = [
   { slug: 'old-man',           label: 'Old Man Voice',                  en: 'audio/old-man-en.mp3' },
   /* This home-page sample is currently available in English only. The
      popup automatically hides the Arabic option because no "ar" path is set. */
-  { slug: 'audio-services',    label: 'Audio Services',                 en: 'audio/audio-services-en.mp3' },
+  { slug: 'audio-services',    label: 'Audio Services',                 en: 'audio/audio-services-en.mp3', description: 'We clean up your bad audio.' },
 ];
