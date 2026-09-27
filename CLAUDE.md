@@ -132,11 +132,25 @@ From the signed SOW:
 
 | Phase | Focus | Status |
 |---|---|---|
-| 1 | Home page, GitHub repo, staging link | **In progress** |
-| 2 | About Us | Blocked — awaiting client bio, photos, brand story |
-| 3 | Reviews & Clients, Services | Blocked — awaiting testimonials, logos, copy |
-| 4 | Contact / Quote form → AOVO email, spam protection | Not started |
+| 1 | Home page, GitHub repo, staging link | Page built — no git remote yet, staging link outstanding |
+| 2 | About Us | Built (`about.html`) |
+| 3 | Reviews & Clients, Services | Built — `feedback.html` and `audio-services.html` |
+| 4 | Contact / Quote form → AOVO email, spam protection | **In progress** — see below |
 | 5 | MP3 optimisation, Cloudflare CDN, cross-browser testing, production deploy, handover | Not started |
+
+**Phase 4 is blocked on the client.** Both forms (Contact, and the Audio Services
+sample test restore) are built and validate, but deliberately do not send: they show
+a "delivery is being configured" notice rather than falsely claiming a message was
+sent. Trena & Ahmed have been asked to claim the free email service included in their
+Hostinger package and supply a mailbox on the AOVO domain — a personal Gmail cannot be
+the sending address, as it fails sender authentication and the mail gets spam-filtered
+or dropped. Once the mailbox exists, delivery goes through a small PHP script on
+Hostinger over SMTP, with the recipient kept as a single constant so it can be tested
+against the developer's address before switching to the client's.
+
+For the sample restore form, the uploaded audio is stored on the server and AOVO is
+emailed a download link, rather than the file being attached — email attachments are
+capped at 25MB and the target customers send long meeting recordings.
 
 Phases 2–4 begin within 3 business days of receiving the required content. The client
 may send page content in **any order** — each page is built independently.
