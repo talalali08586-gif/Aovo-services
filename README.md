@@ -17,14 +17,21 @@ aovo-website/
 ├── index.html            Home page
 ├── about.html            About Us page
 ├── feedback.html         Client reviews (testimonial slider)
+├── audio-services.html   Audio Services page (cleanup / restoration)
+├── contact.html          Contact & order form
 ├── assets/
-│   ├── css/style.css      All page styles (home, about, shared nav, popup)
-│   ├── js/main.js         Page logic — renders labels, drives the popup
+│   ├── css/style.css     All page styles (every page shares this one file)
+│   ├── js/main.js        Shared — header menu, home labels, demo popup
+│   ├── js/audio-services.js  Audio Services page players + restore form
 │   ├── img/hero-2.jpg    Hero photo, desktop (versioned — see note below)
 │   ├── img/hero-2-mobile.jpg  Portrait crop served to phones/tablets
+│   ├── img/logo-white.png     Logo used in the header and hero
 │   └── img/about-*.jpg   About page photos (founders + talent network)
-├── audio/                 Optimised MP3s only (never WAVs)
-├── data/demos.js          Audio manifest — single source of truth
+├── audio/                Optimised MP3s only (never WAVs)
+├── data/demos.js         Home page audio manifest — single source of truth
+├── data/audio-services-demos.js  Audio Services page sample manifest
+├── README.md
+├── CLAUDE.md             Project brief and working agreements
 └── .gitignore
 ```
 

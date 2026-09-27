@@ -12,3 +12,6 @@ node_modules/
 
 # Windows
 Thumbs.db
+
+# Per-developer editor/tool settings — machine-specific, not project config
+.claude/settings.local.json
