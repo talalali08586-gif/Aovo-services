@@ -9,22 +9,11 @@ const audioServiceDemoMap = Object.fromEntries(
   AUDIO_SERVICE_DEMOS.map(demo => [demo.slug, demo])
 );
 
+// The card that is currently playing, so starting one sample stops any other.
 let activeDemoAudio = null;
 
-function makePlayIcon(){
-  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-  svg.setAttribute('viewBox', '0 0 24 24');
-  const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-  path.setAttribute('d', 'M8 5v14l11-7z');
-  svg.appendChild(path);
-  return svg;
-}
-
-function setDemoSeekFill(seek, percent){
-  seek.value = percent;
-  seek.style.background = `linear-gradient(90deg,var(--gold) ${percent}%,rgba(216,178,90,.18) ${percent}%)`;
-}
-
+// makePlayIcon, setSeekFill and setPlayButtonState come from
+// assets/js/audio-ui.js, loaded before this file.
 document.querySelectorAll('[data-audio-service-demo]').forEach(container => {
   const demo = audioServiceDemoMap[container.dataset.audioServiceDemo];
   if (!demo || !demo.en) return;
@@ -64,11 +53,10 @@ document.querySelectorAll('[data-audio-service-demo]').forEach(container => {
   seek.setAttribute('aria-label', `Seek ${demo.slug.replace(/-/g, ' ')} sample`);
   nowPlaying.append(status, seek);
 
+  // these cards do swap their visible wording between Play and Pause, so the
+  // label argument is true — unlike the popup's language buttons
   function showPlayState(isPlaying){
-    const path = play.querySelector('path');
-    play.classList.toggle('playing', isPlaying);
-    play.lastChild.nodeValue = isPlaying ? 'Pause' : 'Play';
-    path.setAttribute('d', isPlaying ? 'M7 5h4v14H7zM13 5h4v14h-4z' : 'M8 5v14l11-7z');
+    setPlayButtonState(play, isPlaying, true);
   }
 
   play.addEventListener('click', () => {
@@ -97,14 +85,14 @@ document.querySelectorAll('[data-audio-service-demo]').forEach(container => {
   player.addEventListener('ended', () => {
     status.textContent = 'Finished';
     showPlayState(false);
-    setDemoSeekFill(seek, 100);
+    setSeekFill(seek, 100);
   });
   player.addEventListener('timeupdate', () => {
-    if (player.duration) setDemoSeekFill(seek, (player.currentTime / player.duration) * 100);
+    if (player.duration) setSeekFill(seek, (player.currentTime / player.duration) * 100);
   });
   seek.addEventListener('input', () => {
     if (player.duration) player.currentTime = (seek.value / 100) * player.duration;
-    setDemoSeekFill(seek, seek.value);
+    setSeekFill(seek, seek.value);
   });
 
   container.append(label, play, download, nowPlaying, player);

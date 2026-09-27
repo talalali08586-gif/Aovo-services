@@ -76,20 +76,14 @@ let current = null;     // current service key
 let lastTrigger = null; // button to restore focus to
 let seeking = false;    // true while the user is dragging the seek handle
 
-function setSeekFill(pct){
-  npSeek.value = pct;
-  npSeek.style.background = `linear-gradient(90deg,var(--gold) ${pct}%,rgba(216,178,90,.18) ${pct}%)`;
-}
-
+// setSeekFill and setPlayButtonState come from assets/js/audio-ui.js, which
+// every page loads before this file. The popup's language buttons keep their
+// "Play" wording while playing, so the label is left alone here.
 function resetPlayBtns(){
-  [playEn, playAr].forEach(b=>{
-    b.classList.remove('playing');
-    b.querySelector('path').setAttribute('d','M8 5v14l11-7z'); // play icon
-  });
+  [playEn, playAr].forEach(b => setPlayButtonState(b, false, false));
 }
 function setPauseIcon(btn){
-  btn.classList.add('playing');
-  btn.querySelector('path').setAttribute('d','M7 5h4v14H7zM13 5h4v14h-4z'); // pause icon
+  setPlayButtonState(btn, true, false);
 }
 
 // shows/hides a language card depending on whether that language's audio
@@ -131,7 +125,7 @@ function filename(label, lang, src){
 function stopAudio(){
   player.pause(); player.removeAttribute('src'); player.load();
   resetPlayBtns(); npText.textContent='Not playing';
-  npSeek.disabled = true; setSeekFill(0);
+  npSeek.disabled = true; setSeekFill(npSeek, 0);
 }
 function playLang(lang){
   const d = DEMO_MAP[current]; if(!d) return;
@@ -173,9 +167,9 @@ if (overlay) {
 
   player.addEventListener('play',  ()=>{ /* state handled in playLang */ });
   player.addEventListener('pause', ()=>{ if(player.ended) return; resetPlayBtns(); if(!player.ended) npText.textContent='Paused'; });
-  player.addEventListener('ended', ()=>{ resetPlayBtns(); npText.textContent='Finished'; setSeekFill(100); });
+  player.addEventListener('ended', ()=>{ resetPlayBtns(); npText.textContent='Finished'; setSeekFill(npSeek, 100); });
   player.addEventListener('timeupdate', ()=>{
-    if(!seeking && player.duration) setSeekFill(player.currentTime/player.duration*100);
+    if(!seeking && player.duration) setSeekFill(npSeek, player.currentTime/player.duration*100);
   });
 
   // drag-to-seek: jump immediately while dragging, and suppress timeupdate
@@ -183,7 +177,7 @@ if (overlay) {
   npSeek.addEventListener('input', ()=>{
     seeking = true;
     if(player.duration) player.currentTime = (npSeek.value/100)*player.duration;
-    setSeekFill(npSeek.value);
+    setSeekFill(npSeek, npSeek.value);
   });
   npSeek.addEventListener('change', ()=>{ seeking = false; });
 }
