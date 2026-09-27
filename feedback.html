@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <!-- The ?v= number is a cache-buster — bump it (in every HTML file) whenever
      the stylesheet changes, so phones and CDNs refresh their cached copy. -->
-<link rel="stylesheet" href="assets/css/style.css?v=16">
+<link rel="stylesheet" href="assets/css/style.css?v=19">
 </head>
 <body>
 
@@ -213,58 +213,13 @@
      isn't present). demos.js comes along because main.js reads the
      manifest it defines. -->
 <script src="data/demos.js"></script>
+<script src="assets/js/audio-ui.js"></script>
 <script src="assets/js/main.js"></script>
 
 <!-- ============================================================
      SLIDER SCRIPT — page-specific, so it lives here rather than in
      the shared main.js. No libraries; plain DOM + CSS transforms.
      ============================================================ -->
-<script>
-(function(){
-  var track   = document.getElementById('sliderTrack');
-  var slider  = document.getElementById('slider');
-  var dotsBox = document.getElementById('sliderDots');
-  var count   = track.children.length;
-  var index   = 0;
-  var timer   = null;
-  var DELAY   = 15000; // ms between auto-advances
-
-  // one dot per slide, built from the slide count so adding a review
-  // to the HTML above needs no script changes
-  var dots = [];
-  for (var i = 0; i < count; i++){
-    var dot = document.createElement('button');
-    dot.setAttribute('aria-label', 'Go to review ' + (i + 1));
-    (function(n){ dot.addEventListener('click', function(){ go(n); restart(); }); })(i);
-    dotsBox.appendChild(dot);
-    dots.push(dot);
-  }
-
-  function go(n){
-    index = (n + count) % count;           // wraps around at both ends
-    track.style.transform = 'translateX(-' + (index * 100) + '%)';
-    dots.forEach(function(d, i){ d.classList.toggle('active', i === index); });
-  }
-
-  /* auto-cycle — skipped entirely for visitors who ask the OS for
-     reduced motion; paused while the pointer or keyboard focus is
-     inside the slider */
-  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function start(){ if (!reduced && !timer) timer = setInterval(function(){ go(index + 1); }, DELAY); }
-  function stop(){ clearInterval(timer); timer = null; }
-  function restart(){ stop(); start(); }
-
-  document.getElementById('slidePrev').addEventListener('click', function(){ go(index - 1); restart(); });
-  document.getElementById('slideNext').addEventListener('click', function(){ go(index + 1); restart(); });
-
-  slider.addEventListener('mouseenter', stop);
-  slider.addEventListener('mouseleave', start);
-  slider.addEventListener('focusin',  stop);
-  slider.addEventListener('focusout', start);
-
-  go(0);
-  start();
-})();
-</script>
+<script src="assets/js/feedback.js"></script>
 </body>
 </html>

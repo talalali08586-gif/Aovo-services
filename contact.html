@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <!-- The ?v= number is a cache-buster &mdash; keep it in sync across all pages. -->
-<link rel="stylesheet" href="assets/css/style.css?v=16">
+<link rel="stylesheet" href="assets/css/style.css?v=19">
 </head>
 <body>
 
@@ -114,41 +114,8 @@
 <!-- Shared script handles the responsive header. data/demos.js is loaded so
      main.js can safely use the shared manifest on this non-demo page. -->
 <script src="data/demos.js"></script>
+<script src="assets/js/audio-ui.js"></script>
 <script src="assets/js/main.js"></script>
-<script>
-/* ============================================================
-   CONTACT FORM DELIVERY TODO
-   Once the client confirms AOVO's email address and whether to use mailto,
-   Formspree, or another approved service, replace the configuration notice
-   inside this submit handler with that authorised delivery method.
-   ============================================================ */
-(function(){
-  var form = document.getElementById('contactForm');
-  var projectType = document.getElementById('projectType');
-  var otherField = document.getElementById('otherProjectField');
-  var otherInput = document.getElementById('otherProject');
-  var status = document.getElementById('formStatus');
-
-  projectType.addEventListener('change', function(){
-    var isOther = projectType.value === 'other';
-    otherField.hidden = !isOther;
-    otherInput.disabled = !isOther;
-    otherInput.required = isOther;
-    if (!isOther) otherInput.value = '';
-  });
-
-  form.addEventListener('submit', function(event){
-    event.preventDefault();
-    if (!form.checkValidity()) {
-      form.reportValidity();
-      return;
-    }
-
-    // TODO: Send the validated form only after client-approved delivery is set.
-    status.textContent = 'Thank you. Form delivery is being configured; please check back shortly to submit your project request.';
-    status.classList.add('config-notice');
-  });
-})();
-</script>
+<script src="assets/js/contact.js"></script>
 </body>
 </html>
