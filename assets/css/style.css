@@ -94,20 +94,20 @@ body{
 /* ---------- BRAND BLOCK ----------
    A centred band in normal flow between the header and the photo. The page
    background shows through it, and the photo's top vignette fades up into
-   the same darkness, so band and photo read as one piece. On desktop, the
-   logo and title are one flex lockup: centring and responsive sizing apply
-   to the pair, so the logo cannot drift away from the title. */
+   the same darkness, so band and photo read as one piece. On desktop the
+   logo is positioned against the left edge of the band, outside the title
+   stack, so the title, subtitle, and hint stay precisely centred. */
 .brand{
-  text-align:center; width:min(92%,960px); margin:0 auto;
+  position:relative; text-align:center; width:100%; margin:0 auto;
   padding:clamp(10px,1.8vh,22px) 0 clamp(8px,1.4vh,16px);
   animation:fadeDown .9s ease both;
 }
-.brand-lockup{
-  display:flex; align-items:center; justify-content:center;
-  gap:clamp(14px,1.8vw,28px);
-}
 .brand-logo{
-  display:block; flex:0 0 auto;
+  /* The single number that controls how far in from the left edge the logo
+     sits: 14px on small desktops, growing with the viewport, capped at 78px
+     on very wide screens so it never drifts toward the centred title. */
+  position:absolute; left:clamp(14px,4vw,78px); top:50%; transform:translateY(-50%);
+  display:block;
   width:clamp(84px,8.5vw,136px); height:auto;
   filter:drop-shadow(0 4px 14px rgba(0,0,0,.55));
 }
