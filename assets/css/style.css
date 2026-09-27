@@ -598,6 +598,11 @@ body{
 .contact-field-grid{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem 1.15rem; }
 .contact-field{ display:flex; flex-direction:column; gap:.45rem; }
 .contact-field.full{ grid-column:1 / -1; }
+/* The browser's built-in rule for [hidden] is display:none, but the
+   .contact-field rule above comes from our own stylesheet and therefore wins.
+   Without this line the conditional "Other Project Type" field stays on
+   screen (greyed out) even while the script has it marked hidden. */
+.contact-field[hidden]{ display:none; }
 .contact-field label, .contact-field legend{ color:var(--gold-hi); font-size:.82rem; font-weight:600; letter-spacing:.45px; }
 .contact-field .optional{ color:var(--txt-dim); font-weight:400; }
 .contact-field input, .contact-field select, .contact-field textarea{
@@ -614,19 +619,7 @@ body{
   box-shadow:0 0 0 3px rgba(216,178,90,.16), 0 0 0 1px rgba(0,0,0,.32) inset;
 }
 .contact-field input:focus:invalid, .contact-field select:focus:invalid{ border-color:#df9a78; }
-.contact-deadline{ border:0; padding:0; margin:1.45rem 0 0; min-width:0; }
-.contact-deadline + .contact-field{ margin-top:1.45rem; }
-.contact-deadline legend{ margin-bottom:.65rem; }
-.deadline-options{ display:grid; grid-template-columns:repeat(3,1fr); gap:.7rem; }
-.deadline-option{ position:relative; }
-.deadline-option input{ position:absolute; opacity:0; pointer-events:none; }
-.deadline-option label{
-  min-height:54px; display:flex; align-items:center; justify-content:center; padding:.6rem .75rem; text-align:center;
-  border:1px solid rgba(216,178,90,.42); border-radius:10px; color:var(--txt-dim); cursor:pointer;
-  background:rgba(7,5,3,.55); font-size:.84rem; line-height:1.25; transition:.2s;
-}
-.deadline-option input:checked + label{ border-color:var(--gold); color:#241606; background:linear-gradient(180deg,var(--gold-hi),var(--gold)); box-shadow:0 0 16px var(--gold-glow); }
-.deadline-option input:focus-visible + label{ outline:2px solid var(--gold-hi); outline-offset:2px; }
+.contact-deadline{ margin-top:1.45rem; }
 .contact-submit-row{ display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:1rem; margin-top:1.5rem; }
 .contact-submit-row .btn-cta{ text-decoration:none; }
 .contact-submit-row .btn-cta svg{ fill:currentColor; }
@@ -635,7 +628,7 @@ body{
 .form-status.config-notice{ padding:.8rem .95rem; border:1px solid var(--gold-line); border-radius:9px; background:rgba(83,60,20,.25); }
 
 @media (max-width:640px){
-  .contact-field-grid, .deadline-options{ grid-template-columns:1fr; }
+  .contact-field-grid{ grid-template-columns:1fr; }
   .contact-submit-row{ align-items:stretch; }
   .contact-submit-row .btn-cta{ justify-content:center; }
 }

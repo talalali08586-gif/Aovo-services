@@ -41,6 +41,7 @@
     <p class="audio-kicker">Start Your Project</p>
     <h1>CONTACT &amp; ORDER</h1>
     <p>Tell us what you&rsquo;re creating and the AOVO Services team will help shape the right voice and audio solution for your project.</p>
+    <p>Use this form to reach us with any initial questions and we&rsquo;ll reply quickly.</p>
   </section>
 
   <!-- ============================================================
@@ -52,13 +53,13 @@
   <form class="contact-form" id="contactForm" novalidate>
     <div class="contact-form-header">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 1 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-3.08A7 7 0 0 0 19 11h-2z"/></svg>
-      <div><h2>Tell Us About Your Project</h2><p>We&rsquo;ll use these details to understand your scope and prepare a tailored quote.</p></div>
+      <div><h2>Tell Us About Your Project / Ask a Question</h2><p>We&rsquo;ll use these details to understand your scope and prepare a tailored quote.</p></div>
     </div>
 
     <div class="contact-field-grid">
       <div class="contact-field">
         <label for="fullName">Full Name <span aria-hidden="true">*</span></label>
-        <input id="fullName" name="fullName" type="text" autocomplete="name" required />
+        <input id="fullName" name="fullName" type="text" autocomplete="name" dir="auto" required />
       </div>
       <div class="contact-field">
         <label for="email">Email Address <span aria-hidden="true">*</span></label>
@@ -66,7 +67,7 @@
       </div>
       <div class="contact-field">
         <label for="company">Company / Organization Name <span class="optional">(optional)</span></label>
-        <input id="company" name="company" type="text" autocomplete="organization" />
+        <input id="company" name="company" type="text" autocomplete="organization" dir="auto" />
       </div>
       <div class="contact-field">
         <label for="wordCount">Estimated Script Word Count <span class="optional">(optional)</span></label>
@@ -88,22 +89,18 @@
       </div>
       <div class="contact-field full" id="otherProjectField" hidden>
         <label for="otherProject">Other Project Type <span aria-hidden="true">*</span></label>
-        <input id="otherProject" name="otherProject" type="text" disabled placeholder="Please describe your project category" />
+        <input id="otherProject" name="otherProject" type="text" dir="auto" disabled placeholder="Please describe your project category" />
       </div>
     </div>
 
-    <fieldset class="contact-deadline">
-      <legend>Target Deadline</legend>
-      <div class="deadline-options">
-        <div class="deadline-option"><input id="deadline-24" name="deadline" type="radio" value="Within 24 hrs" /><label for="deadline-24">Within 24 hrs</label></div>
-        <div class="deadline-option"><input id="deadline-3days" name="deadline" type="radio" value="Within 3 days" /><label for="deadline-3days">Within 3 days</label></div>
-        <div class="deadline-option"><input id="deadline-flexible" name="deadline" type="radio" value="Flexible" /><label for="deadline-flexible">Flexible</label></div>
-      </div>
-    </fieldset>
+    <div class="contact-field full contact-deadline">
+      <label for="targetDeadline">Target Deadline <span class="optional">(optional)</span></label>
+      <input id="targetDeadline" name="targetDeadline" type="text" autocomplete="off" dir="auto" placeholder="e.g. October 15, 2026 or Flexible" />
+    </div>
 
     <div class="contact-field full">
       <label for="message">Project Details / Message <span class="optional">(optional)</span></label>
-      <textarea id="message" name="message" placeholder="Tell us about your script, intended audience, preferred style, languages, or anything else helpful."></textarea>
+      <textarea id="message" name="message" dir="auto" placeholder="Tell us about your script, intended audience, preferred style, languages, or anything else helpful."></textarea>
     </div>
 
     <div class="contact-submit-row">
