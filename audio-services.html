@@ -64,8 +64,9 @@
       <div class="audio-service-demo" data-audio-service-demo="timing-pacing-fixes"></div>
     </article>
     <article class="audio-service-card">
-      <span class="audio-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="12" height="14" rx="1"/><path class="audio-fill" d="M9 9l4 3-4 3z"/><path d="M18 9v6M21 7v10"/></svg></span>
-      <div><h2>Apply Audio to Video</h2><p>Add an edited, synchronized audio track to your videos for a polished final production.</p></div>
+      <span class="audio-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 15h2l2-5 3 8 2-12 2 7h5"/><path d="M18 3v3M16.5 4.5h3"/></svg></span>
+      <div><h2>Audio Restoration</h2><p>Turn low-quality phone, Zoom, and meeting audio into a clearer, higher-quality listening experience.</p></div>
+      <div class="audio-service-demo" data-audio-service-demo="audio-restoration"></div>
     </article>
     <article class="audio-service-card">
       <span class="audio-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M10 5v11.5a2.5 2.5 0 1 1-2-2.45"/><path d="M10 5l8-2v11.5a2.5 2.5 0 1 1-2-2.45"/><path d="M10 8l8-2"/></svg></span>
@@ -73,9 +74,8 @@
       <div class="audio-service-demo" data-audio-service-demo="separating-song-stems"></div>
     </article>
     <article class="audio-service-card">
-      <span class="audio-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 15h2l2-5 3 8 2-12 2 7h5"/><path d="M18 3v3M16.5 4.5h3"/></svg></span>
-      <div><h2>Audio Restoration</h2><p>Turn low-quality phone, Zoom, and meeting audio into a clearer, higher-quality listening experience.</p></div>
-      <div class="audio-service-demo" data-audio-service-demo="audio-restoration"></div>
+      <span class="audio-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="12" height="14" rx="1"/><path class="audio-fill" d="M9 9l4 3-4 3z"/><path d="M18 9v6M21 7v10"/></svg></span>
+      <div><h2>Apply Audio to Video</h2><p>Add an edited, synchronized audio track to your videos for a polished final production.</p></div>
     </article>
     <article class="audio-service-card">
       <span class="audio-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 5v14M12 5v14M19 5v14"/><path d="M3 9h4M10 15h4M17 11h4"/><circle class="audio-fill" cx="5" cy="9" r="2"/><circle class="audio-fill" cx="12" cy="15" r="2"/><circle class="audio-fill" cx="19" cy="11" r="2"/></svg></span>
@@ -93,9 +93,41 @@
   <section class="audio-cta">
     <h2>Send Us Your Messy Audio</h2>
     <p>Got a recording with issues that need cleaned up? Send your file and we&rsquo;ll run a free sample test restore so you can hear the difference before committing.</p>
-    <a class="btn-cta" href="#">Request a Free Test Restore</a>
+    <button class="btn-cta" id="sampleRestoreButton" type="button">Request a Sample Test Restore</button>
   </section>
 </main>
+
+<!-- SAMPLE RESTORE FORM — validates the requested details locally. AOVO's
+     approved delivery address/service is still needed before submissions can
+     leave the site, so the form never falsely reports that a file was sent. -->
+<div class="overlay" id="sampleRestoreOverlay" role="dialog" aria-modal="true" aria-labelledby="sampleRestoreTitle" aria-hidden="true">
+  <form class="modal sample-restore-form" id="sampleRestoreForm" novalidate>
+    <button class="x" id="sampleRestoreClose" type="button" aria-label="Close">&times;</button>
+    <div class="eyebrow">Free Sample Test Restore</div>
+    <h2 id="sampleRestoreTitle">Request a Sample Test Restore</h2>
+    <p class="sub">Send us a short example of the audio you would like us to assess.</p>
+    <div class="contact-field">
+      <label for="sampleRestoreName">Full Name <span aria-hidden="true">*</span></label>
+      <input id="sampleRestoreName" name="fullName" type="text" autocomplete="name" required />
+    </div>
+    <div class="contact-field">
+      <label for="sampleRestoreEmail">Email Address <span aria-hidden="true">*</span></label>
+      <input id="sampleRestoreEmail" name="email" type="email" autocomplete="email" required />
+    </div>
+    <div class="contact-field">
+      <label for="sampleRestoreFile">Audio File <span aria-hidden="true">*</span></label>
+      <input id="sampleRestoreFile" name="audioFile" type="file" accept="audio/*" required />
+    </div>
+    <div class="contact-field">
+      <label for="sampleRestoreComments">Comments <span aria-hidden="true">*</span></label>
+      <textarea id="sampleRestoreComments" name="comments" required placeholder="Tell us what your audio issues are and please indicate the timestamps"></textarea>
+    </div>
+    <div class="sample-restore-actions">
+      <button class="btn-cta" type="submit">Continue</button>
+      <p class="form-status" id="sampleRestoreStatus" aria-live="polite"></p>
+    </div>
+  </form>
+</div>
 
 <!-- The Audio Services manifest renders a player only where a matching sample exists. -->
 <script src="data/demos.js"></script>

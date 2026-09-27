@@ -547,17 +547,9 @@ body{
   margin-top:-.15rem; padding-top:.8rem; border-top:1px solid rgba(216,178,90,.2);
 }
 .audio-service-demo-label{ color:var(--gold); font-size:.74rem; font-weight:600; letter-spacing:1.1px; text-transform:uppercase; }
-.audio-service-demo audio{ width:min(100%,260px); height:34px; accent-color:var(--gold); }
-.audio-service-download{ color:var(--gold-hi); font-size:.8rem; font-weight:600; text-decoration:none; }
-.audio-service-download:hover, .audio-service-download:focus-visible{ color:var(--gold); text-decoration:underline; outline:none; }
-.audio-demo-placeholder{
-  margin:clamp(30px,5vh,58px) auto 0; max-width:800px; padding:clamp(22px,4vw,38px);
-  text-align:center; border:1px dashed var(--gold-line); border-radius:16px;
-  background:rgba(17,12,7,.5);
-}
-.audio-demo-placeholder svg{ width:31px; height:31px; fill:var(--gold); margin-bottom:.7rem; filter:drop-shadow(0 0 8px var(--gold-glow)); }
-.audio-demo-placeholder h2{ font-family:var(--serif); color:var(--gold-hi); font-size:1.18rem; margin-bottom:.45rem; }
-.audio-demo-placeholder p{ color:var(--txt-dim); line-height:1.6; font-size:.92rem; }
+.audio-service-demo .btn{ padding:.5rem .75rem; font-size:.78rem; }
+.audio-service-demo .nowplaying{ flex:1 1 100%; margin-top:0; }
+.audio-service-demo audio{ display:none; }
 .audio-cta{
   margin-top:clamp(32px,6vh,72px); text-align:center; padding:clamp(28px,5vw,52px) clamp(20px,5vw,64px);
   border:1px solid var(--gold-line); border-radius:20px;
@@ -567,6 +559,12 @@ body{
 .audio-cta h2{ font-family:var(--serif); color:var(--gold-hi); font-size:clamp(1.35rem,3vw,2rem); margin-bottom:.7rem; }
 .audio-cta p{ max-width:710px; margin:0 auto 1.35rem; color:var(--txt-dim); line-height:1.65; font-size:clamp(.92rem,1.6vw,1.05rem); }
 .audio-cta .btn-cta{ text-decoration:none; }
+.sample-restore-form{ max-height:calc(100vh - 36px); overflow:auto; }
+.sample-restore-form .contact-field{ margin-top:.9rem; }
+.sample-restore-form .contact-field input[type="file"]{ padding:.58rem .7rem; font-size:.84rem; }
+.sample-restore-form textarea{ min-height:112px; }
+.sample-restore-actions{ display:flex; flex-wrap:wrap; gap:1rem; align-items:center; margin-top:1.2rem; }
+.sample-restore-actions .form-status{ flex:1 1 100%; }
 
 @media (max-width:720px){
   .audio-services-grid{ grid-template-columns:1fr; }
