@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <!-- The ?v= number is a cache-buster &mdash; keep it in sync across all pages. -->
-<link rel="stylesheet" href="assets/css/style.css?v=19">
+<link rel="stylesheet" href="assets/css/style.css?v=20">
 </head>
 <body>
 
@@ -97,9 +97,9 @@
   </section>
 </main>
 
-<!-- SAMPLE RESTORE FORM — validates the requested details locally. AOVO's
-     approved delivery address/service is still needed before submissions can
-     leave the site, so the form never falsely reports that a file was sent. -->
+<!-- SAMPLE RESTORE FORM — validated in the browser, then uploaded by
+     assets/js/audio-services.js to api/sample-restore.php, which stores the
+     file on the server and emails AOVO a download link. -->
 <div class="overlay" id="sampleRestoreOverlay" role="dialog" aria-modal="true" aria-labelledby="sampleRestoreTitle" aria-hidden="true">
   <form class="modal sample-restore-form" id="sampleRestoreForm" novalidate>
     <button class="x" id="sampleRestoreClose" type="button" aria-label="Close">&times;</button>
@@ -116,11 +116,17 @@
     </div>
     <div class="contact-field">
       <label for="sampleRestoreFile">Audio File <span aria-hidden="true">*</span></label>
-      <input id="sampleRestoreFile" name="audioFile" type="file" accept="audio/*" required />
+      <input id="sampleRestoreFile" name="audioFile" type="file" accept="audio/*" data-max-mb="100" required />
     </div>
     <div class="contact-field">
       <label for="sampleRestoreComments">Comments <span aria-hidden="true">*</span></label>
       <textarea id="sampleRestoreComments" name="comments" required placeholder="Tell us what your audio issues are and please indicate the timestamps"></textarea>
+    </div>
+    <!-- Spam trap: hidden from people, so only bots fill it in. The server
+         quietly discards any submission where it is not empty. -->
+    <div class="form-trap" aria-hidden="true">
+      <label for="sampleRestoreWebsite">Leave this field empty</label>
+      <input id="sampleRestoreWebsite" name="website" type="text" tabindex="-1" autocomplete="off" />
     </div>
     <div class="sample-restore-actions">
       <button class="btn-cta" type="submit">Continue</button>
@@ -134,6 +140,7 @@
 <script src="data/audio-services-demos.js"></script>
 <script src="assets/js/audio-ui.js"></script>
 <script src="assets/js/main.js"></script>
+<script src="assets/js/form-send.js"></script>
 <script src="assets/js/audio-services.js"></script>
 </body>
 </html>

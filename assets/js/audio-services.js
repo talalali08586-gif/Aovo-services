@@ -100,9 +100,10 @@ document.querySelectorAll('[data-audio-service-demo]').forEach(container => {
 
 /* ============================================================
    SAMPLE TEST RESTORE FORM
-   The form is ready for a delivery service once the client authorises one.
-   Until then, it validates locally and never claims that an uploaded file
-   has been transmitted.
+   Validates the form, then uploads the audio and details to
+   api/sample-restore.php, which stores the file on the server and
+   emails AOVO a download link. Sending uses the shared helpers in
+   form-send.js. See README.md, "Form delivery".
    ============================================================ */
 const sampleRestoreButton = document.getElementById('sampleRestoreButton');
 const sampleRestoreOverlay = document.getElementById('sampleRestoreOverlay');
@@ -137,7 +138,37 @@ if (sampleRestoreButton && sampleRestoreOverlay && sampleRestoreClose && sampleR
       sampleRestoreForm.reportValidity();
       return;
     }
-    sampleRestoreStatus.textContent = 'Thank you. Secure form delivery is being configured; your file has not been sent yet.';
-    sampleRestoreStatus.classList.add('config-notice');
+
+    // Refuse oversized files before uploading, rather than making the
+    // visitor wait for the whole upload only to be turned away.
+    const fileInput = document.getElementById('sampleRestoreFile');
+    const maxMb = Number(fileInput.dataset.maxMb);
+    if (maxMb && fileInput.files[0].size > maxMb * 1024 * 1024) {
+      setFormStatus(sampleRestoreStatus, 'That file is larger than ' + maxMb + 'MB. Please send a shorter excerpt.', true);
+      return;
+    }
+
+    // the button stays disabled while sending, so a double click can't
+    // upload the same file twice
+    const submitButton = sampleRestoreForm.querySelector('button[type="submit"]');
+    submitButton.disabled = true;
+    setFormStatus(sampleRestoreStatus, 'Uploading your file…');
+
+    sendForm(sampleRestoreForm, 'api/sample-restore.php', {
+      onProgress: percent => {
+        setFormStatus(sampleRestoreStatus, percent < 100
+          ? 'Uploading your file… ' + percent + '%'
+          : 'Upload complete. Sending your request…');
+      },
+      onSuccess: message => {
+        setFormStatus(sampleRestoreStatus, message);
+        sampleRestoreForm.reset();
+        submitButton.disabled = false;
+      },
+      onError: message => {
+        setFormStatus(sampleRestoreStatus, message, true);
+        submitButton.disabled = false;
+      }
+    });
   });
 }

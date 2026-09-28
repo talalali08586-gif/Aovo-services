@@ -117,6 +117,54 @@ approved set of 12 Home-page labels.
 Cards without a listed sample simply show no player until the client supplies
 one. The current files are English-only.
 
+## Form delivery (Contact and Sample Test Restore)
+
+Both forms send through the AOVO mailbox `info@aovoservices.com` on
+Hostinger, using the small PHP scripts in `api/`:
+
+| File | Job |
+|---|---|
+| `api/contact.php` | Emails the Contact & Order form to AOVO |
+| `api/sample-restore.php` | Saves the uploaded audio and emails AOVO a download link |
+| `api/download.php` | Serves that download link (the uploads folder is closed to the web) |
+| `api/mailer.php` | Shared helpers: settings, field cleaning, sending over SMTP |
+| `api/config.example.php` | Template for the settings file |
+
+Uploaded audio is linked rather than attached, because email services
+reject attachments over about 25MB and customers often send long
+recordings. Replying to a form email in AOVO's inbox goes straight to the
+visitor. Spam protection is a hidden "trap" field that only bots fill in,
+plus checks on every field on the server.
+
+**Forms only send from the live or staging site.** PHP does not run when
+a page is opened straight from a folder, so a local submit shows the
+"please email us directly" message instead.
+
+### Setting it up on the server (one time)
+
+1. On Hostinger, open the site's `api/` folder in File Manager.
+2. Copy `config.example.php` to `config.php` and replace
+   `PASTE-THE-MAILBOX-PASSWORD-HERE` with the mailbox password.
+   `config.php` is in `.gitignore`: the password must never be committed.
+3. Set `to_address` to wherever submissions should arrive, and
+   `site_url` to the site's address (the staging address while testing
+   on staging).
+4. Submit both forms once and confirm the emails arrive, including the
+   download link.
+
+To change who receives submissions later, edit `to_address` in
+`config.php`. Nothing else needs to change.
+
+### Upload size
+
+The largest upload is 100MB. It is set in three places that must agree:
+`max_upload_mb` in `config.php`, `data-max-mb` on the file input in
+`audio-services.html`, and the PHP limits in `api/.user.ini` (kept a
+little higher). If Hostinger's plan caps uploads lower, lower all three.
+
+Uploaded files stay in `api/uploads/` until someone deletes them, so
+clear out old ones from File Manager now and then.
+
 ## Browser support
 
 Tested on Chrome, Firefox, Safari, Edge, and mobile (iOS/Android). Uses

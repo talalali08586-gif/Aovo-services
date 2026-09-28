@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <!-- The ?v= number is a cache-buster &mdash; keep it in sync across all pages. -->
-<link rel="stylesheet" href="assets/css/style.css?v=19">
+<link rel="stylesheet" href="assets/css/style.css?v=20">
 </head>
 <body>
 
@@ -46,9 +46,8 @@
 
   <!-- ============================================================
        PROJECT FORM
-       Native required and email validation work without a server. The
-       submit handler below deliberately does not send data until the client
-       chooses AOVO&rsquo;s delivery email and a submission method.
+       Validated in the browser, then sent by assets/js/contact.js to
+       api/contact.php, which emails it to AOVO.
        ============================================================ -->
   <form class="contact-form" id="contactForm" novalidate>
     <div class="contact-form-header">
@@ -103,6 +102,13 @@
       <textarea id="message" name="message" dir="auto" placeholder="Tell us about your script, intended audience, preferred style, languages, or anything else helpful."></textarea>
     </div>
 
+    <!-- Spam trap: hidden from people, so only bots fill it in. The server
+         quietly discards any submission where it is not empty. -->
+    <div class="form-trap" aria-hidden="true">
+      <label for="website">Leave this field empty</label>
+      <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+    </div>
+
     <div class="contact-submit-row">
       <p class="contact-required-note"><span aria-hidden="true">*</span> Required fields</p>
       <button class="btn-cta" type="submit"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4l18 8-18 8 3-8-3-8zm3 8h9"/></svg>Request Your Quote</button>
@@ -116,6 +122,7 @@
 <script src="data/demos.js"></script>
 <script src="assets/js/audio-ui.js"></script>
 <script src="assets/js/main.js"></script>
+<script src="assets/js/form-send.js"></script>
 <script src="assets/js/contact.js"></script>
 </body>
 </html>

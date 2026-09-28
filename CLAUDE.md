@@ -135,18 +135,18 @@ From the signed SOW:
 | 1 | Home page, GitHub repo, staging link | Page built — no git remote yet, staging link outstanding |
 | 2 | About Us | Built (`about.html`) |
 | 3 | Reviews & Clients, Services | Built — `feedback.html` and `audio-services.html` |
-| 4 | Contact / Quote form → AOVO email, spam protection | **In progress** — see below |
+| 4 | Contact / Quote form → AOVO email, spam protection | Built — server setup and testing outstanding, see below |
 | 5 | MP3 optimisation, Cloudflare CDN, cross-browser testing, production deploy, handover | Not started |
 
-**Phase 4 is blocked on the client.** Both forms (Contact, and the Audio Services
-sample test restore) are built and validate, but deliberately do not send: they show
-a "delivery is being configured" notice rather than falsely claiming a message was
-sent. Trena & Ahmed have been asked to claim the free email service included in their
-Hostinger package and supply a mailbox on the AOVO domain — a personal Gmail cannot be
-the sending address, as it fails sender authentication and the mail gets spam-filtered
-or dropped. Once the mailbox exists, delivery goes through a small PHP script on
-Hostinger over SMTP, with the recipient kept as a single constant so it can be tested
-against the developer's address before switching to the client's.
+**Phase 4 delivery is built; it needs to be set up and tested on the server.** Both
+forms (Contact, and the Audio Services sample test restore) send through the Hostinger
+mailbox `info@aovoservices.com` over SMTP, via the PHP scripts in `api/`. A personal
+Gmail cannot be the sending address, as it fails sender authentication and the mail
+gets spam-filtered or dropped. The mailbox password and the recipient address live in
+`api/config.php`, which is git-ignored and created on the server from
+`api/config.example.php`. Test against the developer's address first, then switch the
+recipient to the client's. Spam protection is a hidden honeypot field plus server-side
+validation. README.md, "Form delivery", has the setup steps.
 
 For the sample restore form, the uploaded audio is stored on the server and AOVO is
 emailed a download link, rather than the file being attached — email attachments are

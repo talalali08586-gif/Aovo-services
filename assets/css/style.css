@@ -625,7 +625,10 @@ body{
 .contact-submit-row .btn-cta svg{ fill:currentColor; }
 .contact-required-note{ color:var(--txt-dim); font-size:.8rem; }
 .form-status{ flex:1 1 100%; min-height:1.4em; color:var(--gold-hi); font-size:.9rem; line-height:1.5; }
-.form-status.config-notice{ padding:.8rem .95rem; border:1px solid var(--gold-line); border-radius:9px; background:rgba(83,60,20,.25); }
+.form-status.form-notice{ padding:.8rem .95rem; border:1px solid var(--gold-line); border-radius:9px; background:rgba(83,60,20,.25); }
+.form-status.is-error{ color:#f0b89c; border-color:rgba(223,154,120,.55); }
+/* Spam-trap field: moved off-screen rather than display:none, which some bots skip */
+.form-trap{ position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
 
 @media (max-width:640px){
   .contact-field-grid{ grid-template-columns:1fr; }

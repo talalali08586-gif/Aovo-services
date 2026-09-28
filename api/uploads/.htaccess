@@ -1,0 +1,4 @@
+# Visitors' uploaded audio is stored here. Nothing in this folder may be
+# fetched directly from the web; AOVO downloads files through
+# api/download.php using the link in the notification email.
+Require all denied

@@ -1,0 +1,8 @@
+# The settings file (which holds the mailbox password) and the shared
+# helpers are never served to browsers. Only contact.php,
+# sample-restore.php and download.php are meant to be reached.
+<FilesMatch "^(config|config\.example|mailer)\.php$">
+  Require all denied
+</FilesMatch>
+
+Options -Indexes
