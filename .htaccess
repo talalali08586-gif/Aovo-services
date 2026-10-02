@@ -1,0 +1,22 @@
+# ============================================================
+# SERVER RULES (Hostinger) — only used on the live server; opening
+# index.html directly from disk ignores this file.
+# ============================================================
+
+RewriteEngine On
+
+# ONE OFFICIAL ADDRESS — www.aovoservices.com permanently redirects to
+# https://aovoservices.com, so search engines treat them as one site
+# rather than splitting its ranking across two.
+# (HTTP -> HTTPS is left to Hostinger's "Force HTTPS" setting in hPanel.)
+RewriteCond %{HTTP_HOST} ^www\.aovoservices\.com$ [NC]
+RewriteRule ^(.*)$ https://aovoservices.com/$1 [R=301,L]
+
+# KEEP STAGING OUT OF GOOGLE — on any address other than the real domain
+# (e.g. Hostinger's temporary staging link), tell search engines not to
+# list the pages, so the staging copy never competes with the live site.
+RewriteCond %{HTTP_HOST} !^(www\.)?aovoservices\.com$ [NC]
+RewriteRule ^ - [E=AOVO_STAGING:1]
+<IfModule mod_headers.c>
+  Header set X-Robots-Tag "noindex, nofollow" env=AOVO_STAGING
+</IfModule>

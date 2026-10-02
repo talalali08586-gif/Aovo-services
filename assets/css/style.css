@@ -346,12 +346,16 @@ body{
   display:flex; flex-wrap:wrap; justify-content:flex-end;
   gap:clamp(.4rem,.8vw,.7rem);
 }
-/* hamburger button — hidden on desktop, shown by the 920px media query */
+/* hamburger button — hidden on desktop, shown by the 920px media query.
+   The word "MENU" sits beside the three-line icon so it is obvious at a
+   glance; it is real text, so screen readers announce it too. */
 .nav-toggle{
-  display:none; align-items:center; justify-content:center;
-  width:44px; height:44px; border-radius:12px; cursor:pointer;
+  display:none; align-items:center; justify-content:center; gap:.55rem;
+  height:44px; padding:0 .85rem 0 1rem; border-radius:12px; cursor:pointer;
   border:1px solid var(--gold-line); color:var(--gold-hi);
   background:linear-gradient(180deg,rgba(30,21,11,.72),rgba(10,7,4,.82));
+  font-family:var(--sans); font-weight:600; font-size:.82rem;
+  letter-spacing:1.2px; text-transform:uppercase;
   transition:.2s;
 }
 .nav-toggle svg{ width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; }
@@ -586,6 +590,13 @@ body{
   filter:drop-shadow(0 4px 14px rgba(0,0,0,.55)); margin-bottom:.85rem;
 }
 .contact-intro p{ color:var(--txt-dim); line-height:1.65; font-size:clamp(.92rem,1.6vw,1.05rem); }
+/* direct email line under the intro — gold link, wraps cleanly on phones */
+.contact-intro .contact-email{ margin-top:.9rem; }
+.contact-email a{
+  color:var(--gold-hi); font-weight:600; text-decoration:none;
+  border-bottom:1px solid var(--gold-line); overflow-wrap:anywhere; transition:.2s;
+}
+.contact-email a:hover, .contact-email a:focus-visible{ color:#fff6da; border-color:var(--gold-hi); outline:none; }
 .contact-form{
   padding:clamp(22px,4vw,44px); border:1px solid var(--gold-line); border-radius:20px;
   background:linear-gradient(180deg,rgba(24,17,9,.88),rgba(10,7,4,.95));

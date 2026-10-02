@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Every public page, for search engines. When a page is added, add a
+     <url> entry here (always the https://aovoservices.com address, no www)
+     and update <lastmod> on any page whose content changes. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://aovoservices.com/</loc><lastmod>2026-10-01</lastmod></url>
+  <url><loc>https://aovoservices.com/audio-services.html</loc><lastmod>2026-10-01</lastmod></url>
+  <url><loc>https://aovoservices.com/feedback.html</loc><lastmod>2026-10-01</lastmod></url>
+  <url><loc>https://aovoservices.com/about.html</loc><lastmod>2026-10-01</lastmod></url>
+  <url><loc>https://aovoservices.com/contact.html</loc><lastmod>2026-10-01</lastmod></url>
+</urlset>

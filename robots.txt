@@ -1,0 +1,7 @@
+# Tells search engines what they may crawl. Everything is open except the
+# form-handling scripts in api/, which are not pages. The sitemap lists
+# every page — add a line there whenever a new page goes live.
+User-agent: *
+Disallow: /api/
+
+Sitemap: https://aovoservices.com/sitemap.xml

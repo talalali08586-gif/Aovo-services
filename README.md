@@ -26,10 +26,14 @@ aovo-website/
 │   ├── img/hero-2.jpg    Hero photo, desktop (versioned — see note below)
 │   ├── img/hero-2-mobile.jpg  Portrait crop served to phones/tablets
 │   ├── img/logo-white.png     Logo used in the header and hero
+│   ├── img/og-image.jpg  1200x630 link-preview image (WhatsApp, LinkedIn…)
 │   └── img/about-*.jpg   About page photos (founders + talent network)
 ├── audio/                Optimised MP3s only (never WAVs)
 ├── data/demos.js         Home page audio manifest — single source of truth
 ├── data/audio-services-demos.js  Audio Services page sample manifest
+├── robots.txt            Search-engine crawl rules (see "Search engines")
+├── sitemap.xml           List of pages for search engines
+├── .htaccess             Server rules: www redirect, staging kept out of Google
 ├── README.md
 ├── CLAUDE.md             Project brief and working agreements
 └── .gitignore
@@ -206,6 +210,30 @@ So, to swap the photo:
 Similarly, `style.css` is linked with a `?v=` cache-buster on every page.
 After changing the CSS, bump that number **in every HTML file** so cached
 copies on visitors' phones are refreshed.
+
+## Search engines (SEO)
+
+Each page's `<head>` has a **SEARCH & SHARING** block: the description
+Google shows in results, a canonical link (the page's one official
+address), and the preview card used when the link is shared. The home
+page also carries a **BUSINESS DETAILS** block (schema.org data: name,
+email, languages, services) — update it if those details change.
+
+When adding a new page:
+
+1. Copy the SEARCH & SHARING block from an existing page and change the
+   title, description (aim for ~150 characters), and both URLs.
+2. Add the page to `sitemap.xml`.
+
+The official address is always `https://aovoservices.com` with **no
+www**; `.htaccess` redirects `www.` there. It also sends a `noindex`
+header on any other address (such as Hostinger's temporary staging link),
+so the staging copy never shows up in Google. Check it on staging with
+your browser's developer tools (Network → the page → Response Headers →
+`X-Robots-Tag: noindex, nofollow`).
+
+After launch, add the site to **Google Search Console** (on AOVO's own
+Google account) and submit `https://aovoservices.com/sitemap.xml`.
 
 ## Deployment
 
