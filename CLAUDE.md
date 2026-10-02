@@ -132,7 +132,7 @@ From the signed SOW:
 
 | Phase | Focus | Status |
 |---|---|---|
-| 1 | Home page, GitHub repo, staging link | Page built — no git remote yet, staging link outstanding |
+| 1 | Home page, GitHub repo, staging link | Page built, repo on GitHub (`talalali08586-gif/Aovo-services`, branch `main`) — staging link outstanding |
 | 2 | About Us | Built (`about.html`) |
 | 3 | Reviews & Clients, Services | Built — `feedback.html` and `audio-services.html` |
 | 4 | Contact / Quote form → AOVO email, spam protection | Built — server setup and testing outstanding, see below |
